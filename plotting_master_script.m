@@ -108,10 +108,87 @@ print([output_directory 'figure_1_2'],'-djpeg','-r300')
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
+%A-G
+%JH did plots for figures
+
+
+%H
+%OD correlations
+%from proteomicsQc.m
+
+%Arg4
+subplot(2,3,1)
+plot_od_correlations('YHR018C',dependency_directory,output_directory)
+
+%Aco2
+subplot(2,3,2)
+plot_od_correlations('YJL200C',dependency_directory,output_directory)
+
+
+%I
+%local vs global mapping betas
+%from pQTLplotsForManuscript.m
+subplot(2,3,3)
+plot_local_global_beta(dependency_directory,output_directory)
+
+
+%J
+%mapping sensitivity
+%from analyzePqtlSims.m
+subplot(2,3,4)
+plot_sensitivity_simulations(dependency_directory,output_directory)
+
+
+%K
+%parent od boxplot
+%from proteomicsQc.m
+subplot(2,6,9)
+plot_od_boxplot(dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S1_1'],'-dsvg','-r0')
+print([output_directory 'figure_S1_1'],'-djpeg','-r300')
+
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+%L
+%transgression by abundance
+%from proteomicsQc.m
+plot_transgression(dependency_directory,output_directory)
 
 
 
 
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S1_2'],'-dsvg','-r0')
+print([output_directory 'figure_S1_2'],'-djpeg','-r300')
+
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+%M
+%nPqtls as function of parental FC
+%from proteomicsQc.m
+subplot(2,3,1)
+plot_npqtls_fc(dependency_directory,output_directory)
+
+
+%N
+%nPqtls as function of transgression
+%from proteomicsQc.m
+subplot(2,3,2)
+plot_npqtls_transgression(dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S1_3'],'-dsvg','-r0')
+print([output_directory 'figure_S1_3'],'-djpeg','-r300')
+
+close all
 
 
 

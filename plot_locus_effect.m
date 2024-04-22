@@ -88,7 +88,7 @@ function []=plot_locus_effect(gene_name,common_name,locus_number,y_lim,dependenc
     to_plot{2}=v_temp(yjm_idx);
     %to_plot{3}=v_temp(sgrp_idx);
     
-    easyBox([to_plot f6_for_box_plot]);
+    easy_box([to_plot f6_for_box_plot]);
     ylim([0 y_lim])
     title(common_name)
     

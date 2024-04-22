@@ -11,7 +11,7 @@ function []=plot_reproducibility(dependency_directory,output_directory)
     grey=[128 128 128]./256;
     
     
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx]=...
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names]=...
         parse_raw_abundance(dependency_directory,output_directory);
 
     
