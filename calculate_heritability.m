@@ -2,16 +2,11 @@ function [h_squared_rm,h_squared_yjm,h_squared_mean,var_exp]=...
         calculate_heritability(dependency_directory,output_directory)
     
     
-    input_data=readtable([dependency_directory '211031_SegregantProteomicsData_DetectionThreshold80_genes_ORF.tsv'],...
-        'FileType','text');
-    orf_names=input_data.Protein_Group;
-
-    
     mapping_data=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv'],...
         'FileType','text');
     
     
-    [input_mat,~,~,strain_merge_idx,~,~]=...
+    [input_mat,~,~,strain_merge_idx,~,~,orf_names]=...
         parse_raw_abundance(dependency_directory,output_directory);
     
     

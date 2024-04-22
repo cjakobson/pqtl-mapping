@@ -1,8 +1,11 @@
 %parse strain names and raw abundance data
-function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx]=parse_raw_abundance(dependency_directory,output_directory)
+function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,orf_names]=...
+    parse_raw_abundance(dependency_directory,output_directory)
 
     input_data=readtable([dependency_directory '211031_SegregantProteomicsData_DetectionThreshold80_genes_ORF.tsv'],...
         'FileType','text');
+    
+     orf_names=input_data.Protein_Group;
     
     input_mat=table2array(input_data(:,2:end));
     %discard proteins with large number of missing values
