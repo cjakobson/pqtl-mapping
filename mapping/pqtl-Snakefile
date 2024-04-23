@@ -1,0 +1,73 @@
+#sherlock commands
+#ml python/3.9.0
+#export PATH=~/.local/bin:$PATH
+#snakemake -np -s pqtl-Snakefile --cluster "sbatch --time=0:30:00 --mem=8G" -j 999
+#snakemake -p -s pqtl-Snakefile --cluster "sbatch --time=0:30:00 --mem=8G" -j 999
+
+BASE = '/scratch/users/cjakobso/'
+#import sample names
+with open(BASE + 'sample_names.txt') as f:
+	SAMPLES = f.read().splitlines()
+print(SAMPLES)
+
+rule all:
+	input:
+		BASE + "linear_pqtl_od_fdr_0.1.csv"
+
+rule linear_map:
+	input:
+		BASE + "pQTLfilename.mat",
+		BASE + "pQTLtrait.mat",
+		BASE + "f6od.mat"
+	output:
+		BASE + "linear-pqtl/{sample}.mat"
+	params:
+		sample = "{sample}"
+	shell:
+		"""
+		ml matlab ; cd $SCRATCH ; matlab -nodesktop -nodisplay -nosplash -r "linear_mixed_model_pqtl_od('{params.sample}',1); exit"
+		"""
+
+rule linear_perm:
+	input:
+		#BASE + "linear-pqtl/{sample}.mat"
+		BASE + "pQTLfilename.mat",
+		BASE + "pQTLtrait.mat",
+		BASE + "f6od.mat"
+	output:
+		BASE + "linear-pqtl-perm/{sample}_perm.mat"
+	params:
+		sample = "{sample}"
+	shell:
+		"""
+		ml matlab ; cd $SCRATCH ; matlab -nodesktop -nodisplay -nosplash -r "linear_mixed_model_pqtl_od_perm('{params.sample}',100); exit"
+		"""
+
+rule calculate_fdr:
+	input:
+		expand(BASE + "linear-pqtl/{sample}.mat", sample=SAMPLES),
+		expand(BASE + "linear-pqtl-perm/{sample}_perm.mat", sample=SAMPLES)
+	output:
+		BASE + "pval_cutoffs_from_perm_od_fdr_0.1.mat"
+	shell:
+		"""
+		ml matlab ; cd $SCRATCH ; matlab -nodesktop -nodisplay -nosplash -r "estimate_qtl_fdr_od; exit"
+		"""
+
+rule scrape_mapping:
+	input:
+		BASE + "pval_cutoffs_from_perm_od_fdr_0.1.mat"
+	output:
+		BASE + "linear_pqtl_od_fdr_0.1.csv"
+	shell:
+		"""
+		ml matlab ; cd $SCRATCH ; matlab -nodesktop -nodisplay -nosplash -r "scrape_linear_pqtl_od; exit"
+		"""
+
+
+
+
+
+
+
+
