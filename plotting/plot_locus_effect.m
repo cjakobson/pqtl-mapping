@@ -1,5 +1,6 @@
 %plot effect of pQTL
-function []=plot_locus_effect(gene_name,common_name,locus_number,y_lim,dependency_directory,output_directory)
+function []=plot_locus_effect(gene_name,common_name,locus_number,y_lim,...
+    dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')

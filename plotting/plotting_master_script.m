@@ -192,3 +192,95 @@ close all
 
 
 
+%Figure 2
+figure('units','normalized','outerposition',[0 0 1 1])
+%A
+%n/a
+
+%B
+%allele effect and 1K replication
+%Odc2
+subplot(2,6,1)
+plot_locus_effect('YOR222W','Odc2',10727,4e4,dependency_directory,output_directory)
+
+subplot(2,6,2)
+%from pQTLs1kGenomes.m
+plot_locus_effect_1K('YOR222W','Odc2',10727,3e2,dependency_directory,output_directory)
+
+
+%C
+%Rdl1
+subplot(2,6,3)
+plot_locus_effect('YOR285W','Rdl1',10838,6e4,dependency_directory,output_directory)
+
+subplot(2,6,4)
+%from pQTLs1kGenomes.m
+plot_locus_effect_1K('YOR285W','Rdl1',10838,1.5e3,dependency_directory,output_directory)
+
+
+
+%D
+%overall concordance
+%from pQTLs1kGenomes.m
+subplot(2,6,5)
+plot_1K_concordance(dependency_directory,output_directory)
+
+
+
+%E
+%mRNA vs protein effects
+%from assignTagSnps.m
+subplot(2,3,4)
+plot_beta_ase(dependency_directory,output_directory)
+
+
+
+%F
+%MS validation
+%from plotValidation.m
+
+%Ncp1
+subplot(2,6,9)
+plot_validation_cis('NCP1','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+
+%Ser2
+subplot(2,6,10)
+plot_validation_cis('SER2','YDJ8526 RM11 SER2 G>A',dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_2_1'],'-dsvg','-r0')
+print([output_directory 'figure_2_1'],'-djpeg','-r300')
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
+%G
+%bubble plot
+%from pQTLplotsForManuscript.m
+plot_bubble_plot(dependency_directory,output_directory)
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_2_2'],'-dsvg','-r0')
+print([output_directory 'figure_2_2'],'-djpeg','-r300')
+
+
+%G part 2
+%target counts for above bubble plot
+plot_hotspot_targets(dependency_directory,output_directory)
+
+
+
+
+
+%Figure S2
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A
+
+
+
+
