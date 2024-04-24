@@ -329,3 +329,19 @@ end
 
 
 
+%C
+%cis vs trans effect size
+%from pQTLplotsForManuscript.m
+subplot(2,6,7)
+plot_cis_trans_effect(dependency_directory,output_directory)
+
+
+%D
+%cis vs cumulative trans
+%from pQTLplotsForManuscript.m
+subplot(2,6,8)
+plot_cumulative_trans_effect(dependency_directory,output_directory)
+
+
+
+
