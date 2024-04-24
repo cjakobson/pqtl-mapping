@@ -2,10 +2,12 @@
 
 clear
 
+%filebase='/Users/cjakobson/';
+filebase='/Users/christopherjakobson/';
 
-code_directory='/Users/cjakobson/Documents/GitHub/pqtl-mapping/';
-dependency_directory='/Users/cjakobson/Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/';
-output_directory='/Users/cjakobson/Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/manuscript-plots/';
+code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
+dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
+output_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/manuscript-plots/'];
 
 
 %Figure 1
@@ -269,7 +271,15 @@ print([output_directory 'figure_2_2'],'-djpeg','-r300')
 
 %G part 2
 %target counts for above bubble plot
+%from pQTLplotsForManuscript.m
+figure('units','normalized','outerposition',[0 0 1 1])
+subplot(6,1,1)
 plot_hotspot_targets(dependency_directory,output_directory)
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_2_3'],'-dsvg','-r0')
+print([output_directory 'figure_2_3'],'-djpeg','-r300')
 
 
 
@@ -280,6 +290,23 @@ figure('units','normalized','outerposition',[0 0 1 1])
 
 
 %A
+%ASE reproducibility
+%from pQTLplotsForManuscript.m
+plot_ase_reproducibility(dependency_directory,output_directory)
+
+
+%B
+%pQTLs per protein
+%from pQTLplotsForManuscript.m
+subplot(2,3,4)
+plot_npqtls_per_protein(dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S2'],'-dsvg','-r0')
+print([output_directory 'figure_S2'],'-djpeg','-r300')
+
 
 
 
