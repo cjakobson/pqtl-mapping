@@ -1,5 +1,5 @@
 %parse strain names and raw abundance data
-function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names]=...
+function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
     parse_raw_abundance(dependency_directory,output_directory)
 
     input_data=readtable([dependency_directory '211031_SegregantProteomicsData_DetectionThreshold80_genes_ORF.tsv'],...
@@ -24,7 +24,7 @@ function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_id
         else        
             temp_str2=strsplit(temp_str{1},'_');
             strain_names{m}=temp_str2{1};
-            %strainIndex(m)=str2num(temp_str2{3});
+            strain_index(m)=str2num(temp_str2{3});
         end
 
         m=m+1;

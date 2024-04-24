@@ -308,6 +308,24 @@ print([output_directory 'figure_S2'],'-dsvg','-r0')
 print([output_directory 'figure_S2'],'-djpeg','-r300')
 
 
+close all
+
+
+
+%Figure 3
+
+%A
+%n/a
+
+figure('units','normalized','outerposition',[0 0 1 1])
+pqtl_to_plot={'IRA1','IRA2','PDE2; SRA5'};
+%B
+%target tSNE
+%from complexCovariation.m
+for i=1:length(pqtl_to_plot)
+    subplot(2,3,i)
+    plot_pqtl_tnse(pqtl_to_plot{i},dependency_directory,output_directory)
+end
 
 
 

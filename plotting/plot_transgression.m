@@ -9,8 +9,8 @@ function []=plot_transgression(dependency_directory,output_directory)
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
     
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names]=...
-            parse_raw_abundance(dependency_directory,output_directory);
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
+        parse_raw_abundance(dependency_directory,output_directory);
         
     
     [transgressive_mat]=calculate_transgression(dependency_directory,output_directory);

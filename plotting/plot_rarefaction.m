@@ -10,7 +10,7 @@ function []=plot_rarefaction(dependency_directory,output_directory)
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
     
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names]=...
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
         parse_raw_abundance(dependency_directory,output_directory);
     
     
