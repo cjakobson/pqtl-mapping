@@ -343,5 +343,59 @@ subplot(2,6,8)
 plot_cumulative_trans_effect(dependency_directory,output_directory)
 
 
+%E
+%Mcr1 stair plot
+%from erg11dissection.m
+subplot(2,3,5)
+
+gene_name='YKL150W';
+pqtls=[6952,642,10191,10992];
+
+plot_pqtl_stair(gene_name,pqtls,dependency_directory,output_directory)
+
+
+
+%F
+%JH plotted for fig
+
+
+%G
+%n/a
+
+
+%H
+%sign test p values
+%from pQtlSignTest.m
+subplot(2,3,6)
+
+plot_pqtl_sign_test(dependency_directory,output_directory)
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_3'],'-dsvg','-r0')
+print([output_directory 'figure_3'],'-djpeg','-r300')
+
+
+close all
+
+
+
+%Figure S3
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A
+%pQTLs vs microarray deletions
+%from 
+
+
+
+
+
+subplot(2,3,5)
+plot_sign_test_by_strain(dependency_directory,output_directory)
+
+
+
 
 

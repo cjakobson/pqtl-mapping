@@ -5,7 +5,7 @@ function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_id
     input_data=readtable([dependency_directory '211031_SegregantProteomicsData_DetectionThreshold80_genes_ORF.tsv'],...
         'FileType','text');
     
-     orf_names=input_data.Protein_Group;
+    orf_names=input_data.Protein_Group;
     
     input_mat=table2array(input_data(:,2:end));
     %discard proteins with large number of missing values
