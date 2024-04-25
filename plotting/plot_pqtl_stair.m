@@ -43,8 +43,6 @@ function []= plot_pqtl_stair(gene_name,pqtls,dependency_directory,output_directo
     
     [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
         parse_raw_abundance(dependency_directory,output_directory);
-    
-    strain_names(1:10)
 
     v_temp=input_mat(ismember(orf_names,gene_name),:);
 

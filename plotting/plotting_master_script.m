@@ -190,6 +190,8 @@ set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_S1_3'],'-dsvg','-r0')
 print([output_directory 'figure_S1_3'],'-djpeg','-r300')
 
+
+
 close all
 
 
@@ -376,7 +378,7 @@ print([output_directory 'figure_3'],'-dsvg','-r0')
 print([output_directory 'figure_3'],'-djpeg','-r300')
 
 
-close all
+
 
 
 
@@ -386,16 +388,39 @@ figure('units','normalized','outerposition',[0 0 1 1])
 
 %A
 %pQTLs vs microarray deletions
-%from 
+%from compareMicroarray.m
+genes={'YBR140C','YOL081W','YOR360C'};
+deletions={'ira1','ira2','pde2'};
+for i=1:length(genes)
+    subplot(2,3,i)
+    plot_pqtl_microarray(genes{i},deletions{i},dependency_directory,output_directory)
+end
 
 
 
+%B
+%n/a
 
 
+%C
+%MAF of pQTLs vs all segregating
+%from pQTLplotsForManuscript.m
+subplot(2,3,4)
+plot_pqtl_maf(dependency_directory,output_directory)
+
+
+%D
+%
+%from pQtlSignTest.m
 subplot(2,3,5)
 plot_sign_test_by_strain(dependency_directory,output_directory)
 
 
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S3'],'-dsvg','-r0')
+print([output_directory 'figure_S3'],'-djpeg','-r300')
 
 
+
+close all
 
