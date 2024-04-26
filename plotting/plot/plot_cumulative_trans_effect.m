@@ -40,9 +40,6 @@ function []= plot_cumulative_trans_effect(dependency_directory,output_directory)
     ylabel('mean varExp')
     
     
-    mean(to_plot{1})
-    mean(to_plot{2})
-    
     [p h]=ranksum(to_plot{1},to_plot{2});
     text(1.5,0.12,num2str(p))
 

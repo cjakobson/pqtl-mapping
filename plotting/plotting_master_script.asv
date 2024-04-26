@@ -483,9 +483,6 @@ plot_validation_ira2('YKL150W','YDJ8578 RM11 IRA2 G>A',...
 subplot(2,6,7)
 plot_pqtn_blosum(dependency_directory,output_directory)
 
-subplot(2,6,8)
-plot_pqtn_foldx(dependency_directory,output_directory)
-
 
 
 
@@ -503,50 +500,10 @@ figure('units','normalized','outerposition',[0 0 1 1])
 
 
 %J
-%SASA and neighbors for all segregating vs all possible
-%from analyse1kSecondary_v3.m
-subplot(2,8,1)
-plot_structure_all_possible(1,dependency_directory,output_directory)
-
-subplot(2,8,2)
-plot_structure_all_possible(2,dependency_directory,output_directory)
-
-
-%K
-%same for all possible vs pQTNs vs all other segr.
-%from analyse1kSecondary_v3.m
-subplot(2,8,3)
-plot_structure_pqtn(1,dependency_directory,output_directory)
-
-subplot(2,8,4)
-plot_structure_pqtn(2,dependency_directory,output_directory)
-
-
-%L
-%all possible vs 1K, subdivided by secondary structure
-%from analyse1kSecondary_v3.m
-subplot(2,4,5)
-plot_structure_1K(1,dependency_directory,output_directory)
-
-subplot(2,4,6)
-plot_structure_1K(2,dependency_directory,output_directory)
-
-
-%M
-%rare vs common in 1K
-%from analyse1kSecondary_v3.m
-subplot(2,4,7)
-plot_structure_rare_common(1,dependency_directory,output_directory)
-
-subplot(2,4,8)
-plot_structure_rare_common(2,dependency_directory,output_directory)
+%SASA and neighbors for 
 
 
 
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_4_2'],'-dsvg','-r0')
-print([output_directory 'figure_4_2'],'-djpeg','-r300')
 
 
 
