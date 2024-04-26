@@ -2,13 +2,17 @@
 
 clear
 
-%filebase='/Users/cjakobson/';
-filebase='/Users/christopherjakobson/';
+filebase='/Users/cjakobson/';
+%filebase='/Users/christopherjakobson/';
 
 code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
 dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
 output_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/manuscript-plots/'];
 
+addpath([code_directory 'plotting'])
+addpath([code_directory 'plotting/parse'])
+addpath([code_directory 'plotting/calculate'])
+addpath([code_directory 'plotting/plot'])
 
 %Figure 1
 figure('units','normalized','outerposition',[0 0 1 1])
@@ -423,4 +427,57 @@ print([output_directory 'figure_S3'],'-djpeg','-r300')
 
 
 close all
+
+
+%Figure 4
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
+%A
+%cis effect size
+%from pQTLplotsForManuscript.m
+
+subplot(2,6,1)
+plot_cis_effect_size(dependency_directory,output_directory)
+
+
+%B
+%n/a
+
+
+%C
+%n/a
+
+
+%D
+%Mcr1 cis validation
+subplot(2,6,2)
+plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
+
+
+%E
+%trans effect size
+%from pQTLplotsForManuscript.m
+subplot(2,6,3)
+plot_trans_effect_size(dependency_directory,output_directory)
+
+
+%F
+%IRA2 effect on Mcr1
+subplot(2,6,4)
+plot_locus_effect('YKL150W','Mcr1',10191,1e5,...
+    dependency_directory,output_directory)
+
+
+%G
+%IRA2/Mcr1 reconstruction
+%from plotValidation3.m
+subplot(2,6,5)
+plot_validation_ira2('YKL150W','YDJ8578 RM11 IRA2 G>A',dependency_directory,output_directory)
+
+
+
+
+
+
 
