@@ -473,7 +473,7 @@ plot_locus_effect('YKL150W','Mcr1',10191,1e5,...
 %IRA2/Mcr1 reconstruction
 %from plotValidation3.m
 subplot(2,6,5)
-plot_validation_ira2('YKL150W','YDJ8578 RM11 IRA2 G>A',...
+plot_validation_ira2('YKL150W','YDJ8578',...
     dependency_directory,output_directory)
 
 
@@ -547,6 +547,232 @@ plot_structure_rare_common(2,dependency_directory,output_directory)
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_4_2'],'-dsvg','-r0')
 print([output_directory 'figure_4_2'],'-djpeg','-r300')
+
+
+
+%Figure S4
+figure('units','normalized','outerposition',[0 0 1 1])
+
+%A
+%synonymous reconstructions
+%GCS1
+subplot(2,8,1)
+plot_validation_ira2('YDL226C','YDJ8528',...
+    dependency_directory,output_directory)
+
+
+%AAT2
+subplot(2,8,2)
+plot_validation_ira2('YLR027C','YDJ8527',...
+    dependency_directory,output_directory)
+
+
+%structure property histograms
+%B
+
+%SASA
+subplot(2,4,2)
+plot_structure_histogram(1,5,dependency_directory,output_directory)
+
+
+%neighbors
+subplot(2,4,3)
+plot_structure_histogram(2,1,dependency_directory,output_directory)
+
+
+%C
+%SASA split by structure and Ts/Tv
+subplot(2,2,3)
+plot_structure_ts_tv(1,dependency_directory,output_directory)
+
+
+%D
+%histograms for 1K rare/common
+%SASA
+subplot(2,4,7)
+plot_structure_histogram_1K(1,5,dependency_directory,output_directory)
+
+
+%neighbors
+subplot(2,4,8)
+plot_structure_histogram_1K(2,1,dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S4'],'-dsvg','-r0')
+print([output_directory 'figure_S4'],'-djpeg','-r300')
+
+
+close all
+
+
+%Figure 5
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A
+%cross-plot various abundances
+subplot(2,4,1)
+gene_name1='YFR053C';   %Hxk1
+gene_name2='YGL253W';   %Hxk2
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+subplot(2,4,2)
+gene_name1='YCL040W';   %Glk1
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+%B
+%n/a
+
+
+%C
+%JH made fig
+
+
+%D
+%correlations amongst complex members
+%from plotCorrelations.m
+subplot(2,8,5)
+plot_complex_correlation(dependency_directory,output_directory)
+
+
+%E
+%ATP synthase inset
+%from complexCovaration.m
+gene_list={'YBL099W','YJR121W','YBR039W','YPL078C','YKL016C',...
+    'YPL271W','YDR377W','YML081C-A','YOL077W-A','YPR020W'};
+subplot(2,4,4)
+plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
+
+
+%F
+%coexpression vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,5)
+plot_string_quintiles(4,dependency_directory,output_directory)
+
+
+%cellmap vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,6)
+plot_string_quintiles(9,dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_5'],'-dsvg','-r0')
+print([output_directory 'figure_5'],'-djpeg','-r300')
+
+
+
+%Figure S5
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A 
+%correlation in correlations
+%from correlaitonsAcrossExps.m
+plot_corr_across_exps(dependency_directory,output_directory)
+
+
+
+%B
+%some other cross-plots
+subplot(2,4,3)
+gene_name1='YNL037C';   %Idh1
+gene_name2='YOR136W';   %Idh2
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+subplot(2,4,4)
+gene_name1='YIL125W';   %Kgd1
+gene_name2='YDR148C';   %Kgd2
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S5'],'-dsvg','-r0')
+print([output_directory 'figure_S5'],'-djpeg','-r300')
+
+
+
+close all
+
+
+
+
+%Figure 6
+figure('units','normalized','outerposition',[0 0 1 1])
+
+%A
+%SEC61 and Sss1
+subplot(2,8,1)
+plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
+
+
+%B
+%Biogrid overlap summary
+subplot(2,8,2)
+plot_biogrid_overlaps(dependency_directory,output_directory)
+
+
+%C
+%IRA2 and Bcy1
+subplot(2,8,3)
+plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
+
+
+%D
+%n/a
+
+
+%E
+%n/a
+
+
+%F
+%Fre1 pseudo-volcano
+%from plotCorrelations.m
+subplot(2,4,4)
+plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
+
+
+
+%G
+%n/a
+
+
+
+%H
+%pseudo-miami plot for pQTLs vs QTLs
+subplot(2,2,3)
+plot_miami('YOL081W',dependency_directory,output_directory)
+
+
+
+%I
+%pQTN and QTN scores for IRA2
+%from mcr1pQtnScores.m
+plot_pqtn_qtn_scores('YOL081W',10191,dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_6_1'],'-dsvg','-r0')
+print([output_directory 'figure_6_1'],'-djpeg','-r300')
+
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
 
 
 

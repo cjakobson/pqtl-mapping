@@ -92,6 +92,8 @@ function []=plot_locus_effect(gene_name,common_name,locus_number,y_lim,...
     easy_box([to_plot f6_for_box_plot]);
     ylim([0 y_lim])
     title(common_name)
+    xtickangle(45)  
+    xticklabels({'RM','YJM','RM allele','YJM allele'})
     
     
 end

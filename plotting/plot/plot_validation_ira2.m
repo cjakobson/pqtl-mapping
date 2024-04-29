@@ -18,7 +18,8 @@ function []=plot_validation_ira2(gene_name,mutant_to_plot,dependency_directory,o
     
     input_data(ismember(input_data.strain,'QC'),:)=[];
 
-    strain_names=unique(input_data.background_mutation);
+    %strain_names=unique(input_data.background_mutation);
+    strain_names=unique(input_data.strain);
     protein_names=unique(input_data.ORF);
     protein_names(cellfun(@isempty,protein_names))=[];
     protein_names(ismember(protein_names,'NA'))=[];
@@ -42,7 +43,8 @@ function []=plot_validation_ira2(gene_name,mutant_to_plot,dependency_directory,o
 
     for j=1:length(strain_names)
 
-        v_tempStrain=v_temp(ismember(temp_table.background_mutation,strain_names{j}));
+        %v_tempStrain=v_temp(ismember(temp_table.background_mutation,strain_names{j}));
+        v_tempStrain=v_temp(ismember(temp_table.strain,strain_names{j}));
 
         corrected_mat(j)=mean(v_tempStrain,'omitnan');
 
@@ -52,7 +54,8 @@ function []=plot_validation_ira2(gene_name,mutant_to_plot,dependency_directory,o
     clear to_plot v_mean v_sem
     for j=1:length(v_strain)
        
-        strainIdx=ismember(temp_table.background_mutation,v_strain{j});
+        %strainIdx=ismember(temp_table.background_mutation,v_strain{j});
+        strainIdx=ismember(temp_table.strain,v_strain{j});
         
         to_plot{j}=v_temp(strainIdx);
         v_mean(j)=mean(to_plot{j},'omitnan');
@@ -71,7 +74,8 @@ function []=plot_validation_ira2(gene_name,mutant_to_plot,dependency_directory,o
         scatter(j*ones(length(to_plot{j}),1),to_plot{j},10,'k','filled')
     end
     title(gene_name)
-    ylim([0 125])
+    %ylim([0 125])
+    ylim([0 Inf])
     [h p]=ttest2(to_plot{2},to_plot{3});
     text(2.5,120,num2str(p))
     

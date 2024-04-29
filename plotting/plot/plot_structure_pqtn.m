@@ -15,7 +15,7 @@ function []= plot_structure_all_possible(property_idx,dependency_directory,outpu
 
 
     [properties_1K,properties_sim,properties_all_segregating,properties_all_other,properties_pqtn,...
-        struct_mis_1K,mis_secondary,mis_af] = parse_structure_analysis(dependency_directory,output_directory);
+        struct_mis_1K,mis_secondary,mis_af,mis_ts] = parse_structure_analysis(dependency_directory,output_directory);
 
     property_labels={'accessible surface area','neighbors'};
 

@@ -1,5 +1,5 @@
 function [properties_1K,properties_sim,properties_all_segregating,properties_all_other,properties_pqtn,...
-    struct_mis_1K,structure_mis_sim,mis_af] = parse_structure_analysis(dependency_directory,output_directory)
+    struct_mis_1K,structure_mis_sim,mis_af,mis_ts] = parse_structure_analysis(dependency_directory,output_directory)
     
     
     load([dependency_directory '1002dataAnn.mat'])
@@ -28,7 +28,7 @@ function [properties_1K,properties_sim,properties_all_segregating,properties_all
 
     
 
-    load('simulationStructureData.mat')
+    load([dependency_directory 'simulationStructureData.mat'])
     %organize data to plot systematically
     property_labels={'accessible surface area','neighbors'};
 
@@ -58,6 +58,8 @@ function [properties_1K,properties_sim,properties_all_segregating,properties_all
     af=af(idx_to_use);
     mis_af=af(logical(v_mis_1K.*v_has_struct));
 
+    %Ts vs Tv
+    mis_ts=misTs;
 
 
     structure_mis_sim=misSecondary;   %for categorizing

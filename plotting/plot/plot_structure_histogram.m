@@ -1,4 +1,4 @@
-function []= plot_structure_all_possible(property_idx,dependency_directory,output_directory)
+function []= plot_structure_histogram(property_idx,increment,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -32,13 +32,13 @@ function []= plot_structure_all_possible(property_idx,dependency_directory,outpu
     to_plot{2}=properties_all_segregating{property_idx};
     
     hold on
-    easy_box(to_plot)
-    ylim([0 yLim2(property_idx)])
-    xticklabels({'all poss.','all segr.'})
-    [p h]=ranksum(to_plot{1},to_plot{2});
-    text(1.5,35,num2str(p))
+    histogram(to_plot{1},0:increment:yLim2(property_idx),'Normalization','Probability')
+    histogram(to_plot{2},0:increment:yLim2(property_idx),'Normalization','Probability')
+    xlim([0 yLim2(property_idx)])
+    ylim([0 Inf])
     title(property_labels{property_idx})
-
+    axis square
+    legend({'sim.','all segr.'})
 
 end
 
