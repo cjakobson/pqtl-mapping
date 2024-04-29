@@ -2,6 +2,8 @@
 
 clear
 
+tic
+
 filebase='/Users/cjakobson/';
 %filebase='/Users/christopherjakobson/';
 
@@ -773,6 +775,67 @@ print([output_directory 'figure_6_1'],'-djpeg','-r300')
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
+
+%J
+%n/a
+
+
+%K
+%IRA2 reconstruction
+%from plotValidation3.m
+plot_ira2_validation(dependency_directory,output_directory)
+
+
+
+%L
+%phenotyping on ethanol
+%from readSgaDataPQtnPhen.m
+subplot(2,8,9)
+plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',dependency_directory,output_directory)
+
+subplot(2,8,10)
+plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_6_2'],'-dsvg','-r0')
+print([output_directory 'figure_6_2'],'-djpeg','-r300')
+
+
+
+
+%Figure S6
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A
+%IRA2 mapping vs deletion
+%from compareMicroarray.m
+subplot(2,4,1)
+plot_pqtl_5K('YOL081W',dependency_directory,output_directory)
+
+
+%B
+%IRA2 phenotyping in glucose
+subplot(2,8,3)
+plot_pqtn_phenotyping('8578_RM11_IRA2','min glc',dependency_directory,output_directory)
+
+subplot(2,8,4)
+plot_pqtn_phenotyping('8529_YJM975_IRA2','min glc',dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S6'],'-dsvg','-r0')
+print([output_directory 'figure_S6'],'-djpeg','-r300')
+
+
+close all
+
+toc
 
 
 

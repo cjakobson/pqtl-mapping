@@ -13,6 +13,10 @@ function [bar_mat] = calculate_biogrid_overlaps(dependency_directory,output_dire
     pqtl_to_use=pqtn_data(logical(trans_idx.*~od_idx),:);
 
     
+    
+    
+    
+    
     %biogrid
     biogrid_input=readtable([dependency_directory 'BIOGRID-ORGANISM-Saccharomyces_cerevisiae_S288c-4.4.207.tab3.txt']);
 
@@ -115,11 +119,11 @@ function [bar_mat] = calculate_biogrid_overlaps(dependency_directory,output_dire
 
 
     clear bar_mat
-    %fraction complexes and biogrid; then split by biogrid type
-    bar_mat(1,1)=sum(is_complex)/length(is_complex);
-    bar_mat(1,2)=sum(is_biogrid)/length(is_complex);
-    bar_mat(1,3)=1-bar_mat(1,2)-bar_mat(1,1);
-    bar_mat(1,4)=0;
+    %biogrid; then split by biogrid type
+    %bar_mat(1,1)=sum(is_complex)/length(is_complex);
+    bar_mat(1,1)=sum(is_biogrid)/length(is_biogrid);
+    bar_mat(1,2)=1-bar_mat(1,1);
+    bar_mat(1,3)=0;
 
     bar_mat(3,1)=sum(is_genetic)/length(is_genetic);
     bar_mat(3,2)=sum(is_physical)/length(is_genetic);
