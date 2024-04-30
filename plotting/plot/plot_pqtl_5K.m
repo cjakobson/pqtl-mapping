@@ -10,7 +10,7 @@ function [] = plot_pqtl_5K(gene_name,dependency_directory,output_directory)
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
 
-    all_pqtl_data=readtable([dependency_directory  'linearPqtlOd_FDR_0.1.csv']);
+    all_pqtl_data=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
 
     idx_to_use=find(ismember(all_pqtl_data.gene1,gene_name)+...
         ismember(all_pqtl_data.gene2,gene_name));

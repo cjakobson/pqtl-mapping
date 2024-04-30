@@ -835,7 +835,119 @@ print([output_directory 'figure_S6'],'-djpeg','-r300')
 
 close all
 
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+%Figure 7
+
+%A
+%effect size of pQTLs vs QTLs
+subplot(2,8,1)
+plot_pqtl_qtl_effect_size(dependency_directory,output_directory)
+
+
+%B
+%ERG11 phenotypic mapping
+%from erg11dissection.m
+locus1=4972;  %Lys433Asn
+locus2=4974;  %122014T>C
+subplot(2,8,2)
+plot_qtl_effect(locus1,locus2,'48h fluconazole_100uM-rad',dependency_directory,output_directory)
+
+
+
+%C
+%ERG11 MS validation
+%from plotValidation1.m
+subplot(2,8,3)
+plot_validation_erg11(dependency_directory,output_directory)
+
+
+%D
+%ERG11 CRISPEY phenotype validation
+%from readSgaDataErg11FlcGrad.m
+subplot(2,8,4)
+plot_flc_erg11(dependency_directory,output_directory)
+
+
+%E
+%growth QTL rarefaction
+%from pQTLvsQTL.m
+subplot(2,4,3)
+plot_qtl_rarefaction(dependency_directory,output_directory)
+
+
+
+%F
+%distance from phenotypic QTNs to pQTNs/random loci
+%from pQTLvsQTL.m
+subplot(2,4,4)
+plot_qtl_pqtl_distance(dependency_directory,output_directory)
+
+
+%G
+%n/a
+
+
+%H
+%distance from phenotypic QTNs to pQTNs/min glc QTNs
+%from pQTLvsQTL.m
+subplot(2,4,5)
+plot_qtl_pqtl_min_glc_distance(dependency_directory,output_directory)
+
+
+
+%I
+%example miami plot for two phenotypes
+subplot(2,2,4)
+plot_qtl_miami('rapamycin_5uM','tebuconazole_0.6uM',dependency_directory,output_directory)
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_7_1'],'-dsvg','-r0')
+print([output_directory 'figure_7_1'],'-djpeg','-r300')
+
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+%J
+%heatmap of QTN overlap
+%from pQTLvsQTL.m
+subplot(2,4,1)
+plot_overlap_heatmap(dependency_directory,output_directory)
+
+
+%K
+%NCP1 phenotype
+subplot(2,8,3)
+plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_7_2'],'-dsvg','-r0')
+print([output_directory 'figure_7_2'],'-djpeg','-r300')
+
+
+
+%Figure S7
+figure('units','normalized','outerposition',[0 0 1 1])
+
+%A
+
+
+
+
+
 toc
+
+
+
+
+
+
 
 
 
