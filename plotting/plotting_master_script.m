@@ -4,6 +4,15 @@ clear
 
 tic
 
+set(0,'DefaultLineLineWidth',1)
+set(0,'DefaultFigureColor','w')
+set(0,'DefaultAxesFontSize',12)
+set(0,'DefaultAxesLineWidth',1)
+
+blue=[43 172 226]./256;
+orange=[248 149 33]./256;
+grey=[128 128 128]./256;
+
 filebase='/Users/cjakobson/';
 %filebase='/Users/christopherjakobson/';
 
