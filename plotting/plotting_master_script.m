@@ -936,7 +936,62 @@ print([output_directory 'figure_7_2'],'-djpeg','-r300')
 figure('units','normalized','outerposition',[0 0 1 1])
 
 %A
+%pQTN vs QTN effect size
+%from pQTLvsQTL.m
+subplot(2,4,1)
+plot_effect_size_correlation(dependency_directory,output_directory)
 
+
+
+%B
+%NCP1 phenotype on glc
+subplot(2,8,3)
+plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',dependency_directory,output_directory)
+
+
+%C
+%NCP1 validation effect on Erg11 levels
+subplot(2,6,4)
+plot_validation_cis('ERG11','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S7'],'-dsvg','-r0')
+print([output_directory 'figure_S7'],'-djpeg','-r300')
+
+
+
+%Figure S8
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%A
+%sensitivity from simulations
+%from analyzePqtlSims.m
+subplot(2,4,1)
+plot_strain_sims(dependency_directory,output_directory)
+
+
+
+%B
+%heritability cross-plot
+subplot(2,4,2)
+plot_heritability_parents(dependency_directory,output_directory)
+    
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S8'],'-dsvg','-r0')
+print([output_directory 'figure_S8'],'-djpeg','-r300')
+
+
+
+
+close all
 
 
 
