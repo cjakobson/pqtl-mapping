@@ -29,5 +29,7 @@ function [] = plot_pqtl_qtl_effect_size(dependency_directory,output_directory)
     ylim([1e-5 1])
     ylabel('var. exp.')
 
+    [p h]=ranksum(to_plot{1},to_plot{2});
+    text(1.5,0.5,num2str(p))
 
 end
