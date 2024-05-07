@@ -220,22 +220,32 @@ function []=plot_pqtn_phenotyping(strain_to_plot,condition_to_plot,dependency_di
     for k=1:length(to_plot)
         to_plot{k}=to_plot{k}./v_temp;
     end
+    
+    v_temp=to_plot{1};
+    for k=1:length(to_plot)
+        to_plot{k}=to_plot{k}./v_temp;
+        to_plot{k}(isinf(to_plot{k}))=nan;
+        v_mean(k)=median(to_plot{k},'omitnan');
+        v_std(k)=std(to_plot{k},[],'omitnan')./sqrt(length(to_plot{k}));
+    end
 
     hold on
-    easy_box(to_plot)
+    bar(v_mean)
+    errorbar(1:length(v_mean),v_mean,v_std,'k.')
+    %easy_box(to_plot)
     title(condition_names{condition_idx})
     xticks(1:3)
     xtickangle(45)
     xticklabels([{'YJM975','RM11'} strain_names{mutant_idx}])
-    ylim([0.5 1.5])
+    ylim([0.6 1.2])
     m=1;
     for k=1:length(to_plot)
         for l=(k+1):length(to_plot)
 
             [h p]=ttest2(to_plot{k},to_plot{l});
 
-            plot([k l],1.1+0.1*(m-1)*[1 1],'k')
-            text((k+l)/2,1.2+0.1*(m-1),num2str(p))
+            plot([k l],1.1+0.05*(m-1)*[1 1],'k')
+            text((k+l)/2,1.1+0.05*(m-1),num2str(p))
 
             m=m+1;
 
@@ -243,84 +253,6 @@ function []=plot_pqtn_phenotyping(strain_to_plot,condition_to_plot,dependency_di
     end
 
     
-
-% 
-% 
-% %norm by quad and plot as bars
-% 
-% for i=1:length(reorder_mat)
-%     
-%     figure('units','normalized','outerposition',[0 0 1 1])
-% 
-%     v_median=median(reorder_mat{i},'omitnan');
-%     fwhm_idx=find(v_median>(max(v_median,[],'omitnan')*growthThresh));
-%     fwhm_idx=fwhm_idx(1);
-%     
-%     v_to_use=reorder_mat{i}(:,fwhm_idx);
-%     
-%     for j=1:length(strain_names)
-%     
-%         strainIdx=1;
-%         tempIdx=96*(strainIdx-1)+(1:96);
-%         toPlot{1}=v_to_use(tempIdx);
-% 
-%         strainIdx=2;
-%         tempIdx=96*(strainIdx-1)+(1:96);
-%         toPlot{2}=v_to_use(tempIdx);
-% 
-%         strainIdx=j;
-%         tempIdx=96*(strainIdx-1)+(1:96);
-%         toPlot{3}=v_to_use(tempIdx);
-%         
-%         %vTemp=median(toPlot{1},'omitnan');
-%         vTemp=toPlot{1};
-%         for k=1:length(toPlot)
-%             toPlot{k}=toPlot{k}./vTemp;
-%             toPlot{k}(isinf(toPlot{k}))=nan;
-%             vMean(k)=median(toPlot{k},'omitnan');
-%             vStd(k)=std(toPlot{k},[],'omitnan')./sqrt(length(toPlot{k}));
-%         end
-%         
-%         subplot(2,8,j)
-%         hold on
-%         bar(vMean)
-%         errorbar(1:length(vMean),vMean,vStd,'k.')
-%         %easyBox(toPlot)
-%         title(condition_names{i})
-%         xticks(1:3)
-%         xtickangle(45)
-%         xticklabels([{'YJM975','RM11'} strain_names{j}])
-%         ylim([0.6 1.2])
-%         %ylim([0 700])
-%         
-%         m=1;
-%         for k=1:length(toPlot)
-%             for l=(k+1):length(toPlot)
-%                 
-%                 [h p]=ttest2(toPlot{k},toPlot{l});
-%                 
-%                 plot([k l],1.1+0.05*(m-1)*[1 1],'k')
-%                 text((k+l)/2,1.1+0.05*(m-1),num2str(p))
-%                 
-%                 m=m+1;
-%                 
-%             end
-%         end
-%         
-%     end
-%     
-%     
-%     
-%     
-%     
-%     set(gcf,'PaperPositionMode','auto')
-%     print(['pQtnPhen_fig_' condition_names{i} '_norm_' num2str(figureCounter)],'-dsvg','-r0')
-%     print(['pQtnPhen_fig_' condition_names{i} '_norm_' num2str(figureCounter)],'-djpeg','-r300')
-%     figureCounter=figureCounter+1;
-%     
-% end
-% 
-% 
 
     
 end
