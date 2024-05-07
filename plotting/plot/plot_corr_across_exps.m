@@ -17,7 +17,7 @@ function []=plot_corr_across_exps(dependency_directory,output_directory)
     
     subplot(2,4,1)
     hold on
-    hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto','EdgeColor','none','FaceColor','interp')
+    hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto')%,'EdgeColor','none','FaceColor','interp')
     xlim([-0.6 0.6])
     ylim(xlim)
     axis square
@@ -33,7 +33,7 @@ function []=plot_corr_across_exps(dependency_directory,output_directory)
     
     subplot(2,4,2)
     hold on
-    hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto','EdgeColor','none','FaceColor','interp')
+    hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto')%,'EdgeColor','none','FaceColor','interp')
     xlim([-0.6 0.6])
     ylim(xlim)
     axis square
