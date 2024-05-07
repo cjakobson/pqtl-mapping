@@ -35,10 +35,6 @@ function [bar_mat] = calculate_biogrid_overlaps(dependency_directory,output_dire
 
     for i=1:length(is_biogrid)
 
-        if mod(i,100)==0
-            i
-        end
-
         v1=ismember(genesA,query1{i});
         v2=ismember(genesB,query1{i});
 
