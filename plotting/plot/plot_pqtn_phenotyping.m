@@ -1,4 +1,4 @@
-function []=plot_pqtn_phenotyping(strain_to_plot,condition_to_plot,dependency_directory,output_directory)
+function []=plot_pqtn_phenotyping(strain_to_plot,condition_to_plot,y_lim1,y_lim2,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -237,7 +237,8 @@ function []=plot_pqtn_phenotyping(strain_to_plot,condition_to_plot,dependency_di
     xticks(1:3)
     xtickangle(45)
     xticklabels([{'YJM975','RM11'} strain_names{mutant_idx}])
-    ylim([0.6 1.2])
+    %ylim([0.6 1.2])
+    ylim([y_lim1,y_lim2])
     m=1;
     for k=1:length(to_plot)
         for l=(k+1):length(to_plot)

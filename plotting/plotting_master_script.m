@@ -800,10 +800,10 @@ plot_ira2_validation(dependency_directory,output_directory)
 %phenotyping on ethanol
 %from readSgaDataPQtnPhen.m
 subplot(2,8,9)
-plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
 subplot(2,8,10)
-plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
 
 
@@ -829,10 +829,10 @@ plot_pqtl_5K('YOL081W',dependency_directory,output_directory)
 %B
 %IRA2 phenotyping in glucose
 subplot(2,8,3)
-plot_pqtn_phenotyping('8578_RM11_IRA2','min glc',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8578_RM11_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
 subplot(2,8,4)
-plot_pqtn_phenotyping('8529_YJM975_IRA2','min glc',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8529_YJM975_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
 
 
@@ -930,7 +930,7 @@ plot_overlap_heatmap(dependency_directory,output_directory)
 %K
 %NCP1 phenotype
 subplot(2,8,3)
-plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',0.9,1.2,dependency_directory,output_directory)
 
 
 
@@ -955,7 +955,7 @@ plot_effect_size_correlation(dependency_directory,output_directory)
 %B
 %NCP1 phenotype on glc
 subplot(2,8,3)
-plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',dependency_directory,output_directory)
+plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',0.9,1.2,dependency_directory,output_directory)
 
 
 %C
