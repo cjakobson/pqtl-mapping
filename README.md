@@ -10,6 +10,8 @@
 
  # dependencies
  The mapping and plotting code depends on various input data that can be found here (~ 9 Gb on disk): https://www.dropbox.com/scl/fo/3xbcbe9ivwz8aahrlk137/APGxHor01S7jnNX3a1Yk3Og?rlkey=yx81ckrtaq8eb5pu80ggprjhs&dl=0
+
+ Upon acceptance, a final snapshot of the dependencies to reproduce the final figures will be available on Zenodo.
  
 
  
