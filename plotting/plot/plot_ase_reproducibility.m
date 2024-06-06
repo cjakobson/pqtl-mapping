@@ -35,7 +35,7 @@ function []=plot_ase_reproducibility(plot_offset,dependency_directory,output_dir
         
         for j=(i+1):3
             
-            subplot(2,3,plot_offset+m)
+            subplot(2,4,plot_offset+m)
             hold on
             scatter(v_ase(:,i),v_ase(:,j),10,'k','filled')
             axis square

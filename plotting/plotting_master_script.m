@@ -586,49 +586,69 @@ close all
 
 %Figure 5
 figure('units','normalized','outerposition',[0 0 1 1])
-
-
-
 %A
 %n/a
 
 
 %B
 %JH made fig
+genes_to_plot=readtable([dependency_directory 'glycolysis_tca_genes.csv']);
+name_conversion=readtable([dependency_directory 'nameConversion.csv']);
+
+for i=1:height(name_conversion)
+    
+    temp_str=strsplit(name_conversion.Var1{i},';');
+    name_conversion.Var1{i}=temp_str{1};
+    
+end
+
+for i=1:height(genes_to_plot)
+    
+    genes_to_plot.commonName{i}=name_conversion.Var2{ismember(name_conversion.Var1,...
+        genes_to_plot.commonName{i})};
+    
+end
+
+subplot(2,4,1)
+plot_correlation_heatmap(table2array(genes_to_plot),...
+    dependency_directory,output_directory)
 
 
 %C
-%n/a
+%mean of parents
+subplot(2,4,2)
+plot_correlation_heatmap_parents(table2array(genes_to_plot),...
+    dependency_directory,output_directory)
 
 
 %D
+%n/a
+
+
+%E
 %correlations amongst complex members
 %from plotCorrelations.m
 subplot(2,8,5)
 plot_complex_correlation(dependency_directory,output_directory)
 
 
-%E
+%F
 %Biogrid overlap summary
-subplot(2,8,2)
+subplot(2,8,6)
 plot_biogrid_overlaps(dependency_directory,output_directory)
 
 
 
-%F
+%G
 %SEC61 and Sss1
-subplot(2,8,1)
+subplot(2,8,7)
 plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
 
 
-%G
-%IRA2 and Bcy1
-subplot(2,8,3)
-plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
-
-
 %H
-%n/a
+%IRA2 and Bcy1
+subplot(2,8,8)
+plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
 
 
 %I
@@ -636,14 +656,18 @@ plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directo
 
 
 %J
+%n/a
+
+
+%K
 %Fre1 pseudo-volcano
 %from plotCorrelations.m
-subplot(2,4,4)
+subplot(2,4,5)
 plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
 
 
 
-%K
+%L
 %n/a
 
 
@@ -673,7 +697,7 @@ plot_abundance_correlation(gene_name1,gene_name2,...
     dependency_directory,output_directory)
 
 
-%B 
+%B
 %correlation in correlations
 %from correlaitonsAcrossExps.m
 plot_corr_across_exps(2,dependency_directory,output_directory)
@@ -719,13 +743,13 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %E
 %coexpression vs SWATH correlation quintiles
 %from plotCorrelations.m
-subplot(2,4,8)
+subplot(2,4,1)
 plot_string_quintiles(4,dependency_directory,output_directory)
 
 %F
 %cellmap vs SWATH correlation quintiles
 %from plotCorrelations.m
-subplot(2,4,8)
+subplot(2,4,2)
 plot_string_quintiles(9,dependency_directory,output_directory)
 
 
@@ -774,6 +798,8 @@ plot_flc_erg11(dependency_directory,output_directory)
 %D
 %NCP1 QTN vs pQTN
 subplot(2,4,3)
+plot_pqtn_qtn_scores_overlap(2,'YHR042W',5049,dependency_directory,output_directory)
+
 
 
 %E
@@ -795,10 +821,10 @@ plot_pqtn_qtn_scores(4,'YOL081W',10191,dependency_directory,output_directory)
 %H
 %phenotyping on ethanol
 %from readSgaDataPQtnPhen.m
-subplot(2,8,9)
+subplot(2,8,13)
 plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
-subplot(2,8,10)
+subplot(2,8,14)
 plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
 

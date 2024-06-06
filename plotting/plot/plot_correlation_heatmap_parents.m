@@ -12,7 +12,8 @@ function []=plot_correlation_heatmap(gene_list,dependency_directory,output_direc
     [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
             parse_raw_abundance(dependency_directory,output_directory);
 
-    mat_to_use=input_mat(:,f6_idx);
+    mat_to_use1=input_mat(:,rm_idx);
+    mat_to_use2=input_mat(:,yjm_idx);
         
 
     %filter missing proteins
@@ -27,18 +28,24 @@ function []=plot_correlation_heatmap(gene_list,dependency_directory,output_direc
 
             temp_idx2=ismember(orf_names,gene_list{j});
 
-            v1=mat_to_use(temp_idx1,:)';
-            v2=mat_to_use(temp_idx2,:)';
+            v1=mat_to_use1(temp_idx1,:)';
+            v2=mat_to_use1(temp_idx2,:)';
             [r p]=corr(v1,v2,'rows','complete');
 
-            corr_mat(i,j)=r;
+            corr_mat1(i,j)=r;
+            
+            v1=mat_to_use2(temp_idx1,:)';
+            v2=mat_to_use2(temp_idx2,:)';
+            [r p]=corr(v1,v2,'rows','complete');
+
+            corr_mat2(i,j)=r;
 
         end
 
     end
     
     
-    imagesc(corr_mat,[-0.75 0.75])
+    imagesc((corr_mat1+corr_mat2)/2,[-0.75 0.75])
     axis square
     colormap gray
     colorbar
