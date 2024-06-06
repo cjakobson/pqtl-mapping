@@ -1,4 +1,4 @@
-function [] = plot_pqtl_tnse(gene_name,dependency_directory,output_directory)
+function [] = plot_pqtl_tnse(gene_name,gene_to_highlight,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -55,7 +55,11 @@ function [] = plot_pqtl_tnse(gene_name,dependency_directory,output_directory)
         temp_idx2=ismember(orf_names,temp_genes(~temp_sign));
         v_color(temp_idx2)=2;
         
+        hold on
         gscatter(Y(:,1),Y(:,2),v_color,[grey;blue;orange],'...',[20 30 30])%'kbr')
+        
+        plot_idx=ismember(orf_names,gene_to_highlight);
+        scatter(Y(plot_idx,1),Y(plot_idx,2),30,'k','filled')
         axis square
         xlim([-20 20])
         ylim([-20 20])

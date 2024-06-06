@@ -13,8 +13,8 @@ blue=[43 172 226]./256;
 orange=[248 149 33]./256;
 grey=[128 128 128]./256;
 
-%filebase='/Users/cjakobson/';
-filebase='/Users/christopherjakobson/';
+filebase='/Users/cjakobson/';
+%filebase='/Users/christopherjakobson/';
 
 code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
 dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
@@ -34,41 +34,65 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %B
 %reproducibility
 %from proteomicsQc.m
-subplot(2,3,1)
+subplot(2,4,1)
 plot_reproducibility(dependency_directory,output_directory)
 
 
 %C
-%parents and F6 boxplots
-%from pQTLplotsForManuscript.m
-
-%Mcr1
-subplot(2,6,3)
-plot_parents_f6_boxplot('YKL150W',dependency_directory,output_directory)
-
-%Gap1
-subplot(2,6,4)
-plot_parents_f6_boxplot('YKR039W',dependency_directory,output_directory)
+%volcano
+%JH did plot for figures
+%from proteomicsQc.m
+subplot(2,4,2)
+plot_main_volcano(dependency_directory,output_directory)
 
 
 %D
-%heritability against abundance
+%parents and F6 boxplots
 %from pQTLplotsForManuscript.m
-subplot(2,3,3)
-plot_heritability_abundance(dependency_directory,output_directory)
+%Gap1
+subplot(2,8,5)
+plot_parents_f6_boxplot('YKR039W',dependency_directory,output_directory)
+
+%Rnr4
+subplot(2,8,6)
+plot_parents_f6_boxplot('YGR180C',dependency_directory,output_directory)
 
 
 %E
-%effect of locus in F6 progeny [RM/YJM/RM allele/YJM allele]
-%from erg11dissection.m
-subplot(2,6,7)
-plot_locus_effect('YKL150W','Mcr1',6952,1e5,dependency_directory,output_directory)
+%heritability against abundance
+%from pQTLplotsForManuscript.m
+subplot(2,4,4)
+plot_heritability_abundance(dependency_directory,output_directory)
 
 
 %F
-%fraction of variance explained
+%transgression against abundance
+subplot(2,4,5)
+plot_transgression_abundance(dependency_directory,output_directory)
+
+
+
+%G
+%effect of locus in F6 progeny [RM/YJM/RM allele/YJM allele]
+%from erg11dissection.m
+subplot(2,8,11)
+plot_locus_effect('YKL150W','Mcr1',6952,1e5,dependency_directory,output_directory)
+
+
+%H
+%n/a
+
+%I
+%Mcr1 cis validation
+subplot(2,8,12)
+plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
+
+
+
+%F
+%variance explained
 %from pQTLplotsForManuscript.m
-subplot(2,3,5)
+subplot(2,4,7)
 plot_heritability_explained(dependency_directory,output_directory)
 
 
@@ -76,48 +100,16 @@ plot_heritability_explained(dependency_directory,output_directory)
 %G
 %pQTL rarefaction
 %from pQTLplotsForManuscript.m
-subplot(2,3,6)
+subplot(2,4,8)
 plot_rarefaction(dependency_directory,output_directory)
+
+
 
 
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_1_1'],'-dsvg','-r0')
 print([output_directory 'figure_1_1'],'-djpeg','-r300')
-
-
-figure('units','normalized','outerposition',[0 0 1 1])
-%H
-%volcano plot (full)
-%JH did plot for figures
-%from proteomicsQc.m
-subplot(2,3,1)
-plot_main_volcano(dependency_directory,output_directory)
-
-
-%I
-%couple more examples
-
-%Erg11
-subplot(2,6,3)
-plot_parents_f6_boxplot('YHR007C',dependency_directory,output_directory)
-
-%Rnr4
-subplot(2,6,4)
-plot_parents_f6_boxplot('YGR180C',dependency_directory,output_directory)
-
-
-%J
-%boxplot zoom in
-%JH did plot for figures
-subplot(2,3,3)
-plot_zoom_volcano(dependency_directory,output_directory)
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_1_2'],'-dsvg','-r0')
-print([output_directory 'figure_1_2'],'-djpeg','-r300')
-
 
 
 
@@ -130,37 +122,51 @@ figure('units','normalized','outerposition',[0 0 1 1])
 
 
 %H
+%parent od boxplot
+%from proteomicsQc.m
+subplot(2,8,1)
+plot_od_boxplot(dependency_directory,output_directory)
+
+
+%I
+%fold change vs abundance
+subplot(2,4,2)
+plot_foldchange_abundance(dependency_directory,output_directory)
+
+
+
+%J
+%heritability vs C.V.
+subplot(2,4,3)
+plot_heritability_cv(dependency_directory,output_directory)
+
+
+%K
 %OD correlations
 %from proteomicsQc.m
 
 %Arg4
-subplot(2,3,1)
+subplot(2,4,5)
 plot_od_correlations('YHR018C',dependency_directory,output_directory)
 
 %Aco2
-subplot(2,3,2)
+subplot(2,4,6)
 plot_od_correlations('YJL200C',dependency_directory,output_directory)
 
 
-%I
+
+%L
 %local vs global mapping betas
 %from pQTLplotsForManuscript.m
-subplot(2,3,3)
+subplot(2,4,7)
 plot_local_global_beta(dependency_directory,output_directory)
 
 
-%J
+%M
 %mapping sensitivity
 %from analyzePqtlSims.m
-subplot(2,3,4)
+subplot(2,4,8)
 plot_sensitivity_simulations(dependency_directory,output_directory)
-
-
-%K
-%parent od boxplot
-%from proteomicsQc.m
-subplot(2,6,9)
-plot_od_boxplot(dependency_directory,output_directory)
 
 
 
@@ -171,12 +177,37 @@ print([output_directory 'figure_S1_1'],'-djpeg','-r300')
 
 
 figure('units','normalized','outerposition',[0 0 1 1])
-%L
-%transgression by abundance
-%from proteomicsQc.m
-plot_transgression(dependency_directory,output_directory)
 
 
+%N
+%total variance explained vs log2 fold change
+subplot(2,4,1)
+plot_variance_foldchange(dependency_directory,output_directory)
+
+%O
+%total variance explained vs transgression
+subplot(2,4,2)
+plot_variance_transgression(dependency_directory,output_directory)
+
+
+
+%P
+%boxplot zoom in
+%JH did plot for figures
+subplot(2,4,3)
+plot_zoom_volcano(dependency_directory,output_directory)
+
+
+%Q
+%n pQTLs vs fold change
+subplot(2,4,4)
+plot_pqtls_foldchange(dependency_directory,output_directory)
+
+
+%R
+%n pQTLs vs transgression
+subplot(2,4,5)
+plot_pqtls_transgression(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
@@ -219,51 +250,36 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %B
 %allele effect and 1K replication
 %Odc2
-subplot(2,6,1)
+subplot(2,8,1)
 plot_locus_effect('YOR222W','Odc2',10727,4e4,dependency_directory,output_directory)
 
-subplot(2,6,2)
+subplot(2,8,2)
 %from pQTLs1kGenomes.m
 plot_locus_effect_1K('YOR222W','Odc2',10727,3e2,dependency_directory,output_directory)
 
 
 %C
 %Rdl1
-subplot(2,6,3)
+subplot(2,8,3)
 plot_locus_effect('YOR285W','Rdl1',10838,6e4,dependency_directory,output_directory)
 
-subplot(2,6,4)
+subplot(2,8,4)
 %from pQTLs1kGenomes.m
 plot_locus_effect_1K('YOR285W','Rdl1',10838,1.5e3,dependency_directory,output_directory)
 
 
 
+
 %D
-%overall concordance
-%from pQTLs1kGenomes.m
-subplot(2,6,5)
-plot_1K_concordance(dependency_directory,output_directory)
-
-
-
-%E
-%mRNA vs protein effects
-%from assignTagSnps.m
-subplot(2,3,4)
-plot_beta_ase(dependency_directory,output_directory)
-
-
-
-%F
 %MS validation
 %from plotValidation.m
 
 %Ncp1
-subplot(2,6,9)
+subplot(2,8,5)
 plot_validation_cis('NCP1','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
 
 %Ser2
-subplot(2,6,10)
+subplot(2,8,6)
 plot_validation_cis('SER2','YDJ8526 RM11 SER2 G>A',dependency_directory,output_directory)
 
 
@@ -275,7 +291,7 @@ print([output_directory 'figure_2_1'],'-djpeg','-r300')
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
-%G
+%E
 %bubble plot
 %from pQTLplotsForManuscript.m
 plot_bubble_plot(dependency_directory,output_directory)
@@ -286,12 +302,26 @@ print([output_directory 'figure_2_2'],'-dsvg','-r0')
 print([output_directory 'figure_2_2'],'-djpeg','-r300')
 
 
-%G part 2
+%E part 2
 %target counts for above bubble plot
 %from pQTLplotsForManuscript.m
 figure('units','normalized','outerposition',[0 0 1 1])
 subplot(6,1,1)
 plot_hotspot_targets(dependency_directory,output_directory)
+
+
+%F
+%cis vs trans effect size
+%from pQTLplotsForManuscript.m
+subplot(2,8,9)
+plot_cis_trans_effect(dependency_directory,output_directory)
+
+
+%G
+%cis vs cumulative trans
+%from pQTLplotsForManuscript.m
+subplot(2,8,10)
+plot_cumulative_trans_effect(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
@@ -306,17 +336,46 @@ print([output_directory 'figure_2_3'],'-djpeg','-r300')
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
+
 %A
-%ASE reproducibility
-%from pQTLplotsForManuscript.m
-plot_ase_reproducibility(dependency_directory,output_directory)
+%overall concordance
+%from pQTLs1kGenomes.m
+subplot(2,8,1)
+plot_1K_concordance(dependency_directory,output_directory)
+
 
 
 %B
+%mRNA vs protein effects
+%from assignTagSnps.m
+subplot(2,4,2)
+plot_beta_ase(dependency_directory,output_directory)
+
+
+
+%C
+%synonymous reconstructions
+%GCS1
+subplot(2,8,5)
+plot_validation_ira2('YDL226C','YDJ8528',...
+    dependency_directory,output_directory)
+
+
+%AAT2
+subplot(2,8,6)
+plot_validation_ira2('YLR027C','YDJ8527',...
+    dependency_directory,output_directory)
+
+
+%D
 %pQTLs per protein
 %from pQTLplotsForManuscript.m
-subplot(2,3,4)
+subplot(2,4,4)
 plot_npqtls_per_protein(dependency_directory,output_directory)
+
+
+%E
+%n/a
 
 
 
@@ -331,39 +390,17 @@ close all
 
 %Figure 3
 
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
 %A
 %n/a
 
-figure('units','normalized','outerposition',[0 0 1 1])
-pqtl_to_plot={'IRA1','IRA2','PDE2; SRA5'};
+
 %B
-%target tSNE
-%from complexCovariation.m
-for i=1:length(pqtl_to_plot)
-    subplot(2,3,i)
-    plot_pqtl_tnse(pqtl_to_plot{i},dependency_directory,output_directory)
-end
-
-
-
-%C
-%cis vs trans effect size
-%from pQTLplotsForManuscript.m
-subplot(2,6,7)
-plot_cis_trans_effect(dependency_directory,output_directory)
-
-
-%D
-%cis vs cumulative trans
-%from pQTLplotsForManuscript.m
-subplot(2,6,8)
-plot_cumulative_trans_effect(dependency_directory,output_directory)
-
-
-%E
 %Mcr1 stair plot
 %from erg11dissection.m
-subplot(2,3,5)
+subplot(2,4,1)
 
 gene_name='YKL150W';
 pqtls=[6952,642,10191,10992];
@@ -372,20 +409,29 @@ plot_pqtl_stair(gene_name,pqtls,dependency_directory,output_directory)
 
 
 
-%F
-%JH plotted for fig
+
+%C
+%target tSNE
+%from complexCovariation.m
+pqtl_to_plot={'IRA1','IRA2','PDE2; SRA5'};
+gene_to_highlight='YKL150W'; %Mcr1
+for i=1:length(pqtl_to_plot)
+    subplot(2,4,i+1)
+    plot_pqtl_tnse(pqtl_to_plot{i},gene_to_highlight,dependency_directory,output_directory)
+end
 
 
-%G
+%D
 %n/a
 
 
-%H
+%E
 %sign test p values
 %from pQtlSignTest.m
-subplot(2,3,6)
+subplot(2,4,5)
 
 plot_pqtl_sign_test(dependency_directory,output_directory)
+
 
 
 set(gcf,'PaperPositionMode','auto')
@@ -407,27 +453,27 @@ figure('units','normalized','outerposition',[0 0 1 1])
 genes={'YBR140C','YOL081W','YOR360C'};
 deletions={'ira1','ira2','pde2'};
 for i=1:length(genes)
-    subplot(2,3,i)
+    subplot(2,4,i)
     plot_pqtl_microarray(genes{i},deletions{i},dependency_directory,output_directory)
 end
 
 
 
 %B
-%n/a
+%MAF of pQTLs vs all segregating
+%from pQTLplotsForManuscript.m
+subplot(2,4,4)
+plot_pqtl_maf(dependency_directory,output_directory)
 
 
 %C
-%MAF of pQTLs vs all segregating
-%from pQTLplotsForManuscript.m
-subplot(2,3,4)
-plot_pqtl_maf(dependency_directory,output_directory)
+%JH plotted for fig
 
 
 %D
 %
 %from pQtlSignTest.m
-subplot(2,3,5)
+subplot(2,4,5)
 plot_sign_test_by_strain(dependency_directory,output_directory)
 
 
@@ -440,173 +486,100 @@ print([output_directory 'figure_S3'],'-djpeg','-r300')
 close all
 
 
+
+
+
 %Figure 4
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
 %A
-%cis effect size
-%from pQTLplotsForManuscript.m
-
-subplot(2,6,1)
-plot_cis_effect_size(dependency_directory,output_directory)
+%n/a
 
 
 %B
-%n/a
+%cis effect size
+%from pQTLplotsForManuscript.m
 
+subplot(2,8,1)
+plot_cis_effect_size(dependency_directory,output_directory)
 
 %C
-%n/a
-
-
-%D
-%Mcr1 cis validation
-subplot(2,6,2)
-plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
-
-
-%E
 %trans effect size
 %from pQTLplotsForManuscript.m
-subplot(2,6,3)
+subplot(2,8,2)
 plot_trans_effect_size(dependency_directory,output_directory)
 
 
-%F
+%D
 %IRA2 effect on Mcr1
-subplot(2,6,4)
+subplot(2,8,3)
 plot_locus_effect('YKL150W','Mcr1',10191,1e5,...
     dependency_directory,output_directory)
 
 
-%G
+%E
 %IRA2/Mcr1 reconstruction
 %from plotValidation3.m
-subplot(2,6,5)
+subplot(2,8,4)
 plot_validation_ira2('YKL150W','YDJ8578',...
     dependency_directory,output_directory)
 
 
 
-%H
+%F
 %BLOSUM and FoldX pQTNs vs all segregating
-subplot(2,6,7)
+subplot(2,8,9)
 plot_pqtn_blosum(dependency_directory,output_directory)
 
-subplot(2,6,8)
+subplot(2,8,10)
 plot_pqtn_foldx(dependency_directory,output_directory)
 
 
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_4_1'],'-dsvg','-r0')
-print([output_directory 'figure_4_1'],'-djpeg','-r300')
-
-
-
-figure('units','normalized','outerposition',[0 0 1 1])
-
-%I
-%n/a
-
-
-
-%J
+%G
 %SASA and neighbors for all segregating vs all possible
 %from analyse1kSecondary_v3.m
-subplot(2,8,1)
+subplot(2,8,11)
 plot_structure_all_possible(1,dependency_directory,output_directory)
 
-subplot(2,8,2)
+subplot(2,8,12)
 plot_structure_all_possible(2,dependency_directory,output_directory)
 
 
-%K
+%H
 %same for all possible vs pQTNs vs all other segr.
 %from analyse1kSecondary_v3.m
-subplot(2,8,3)
+subplot(2,8,13)
 plot_structure_pqtn(1,dependency_directory,output_directory)
 
-subplot(2,8,4)
+subplot(2,8,14)
 plot_structure_pqtn(2,dependency_directory,output_directory)
 
 
-%L
-%all possible vs 1K, subdivided by secondary structure
-%from analyse1kSecondary_v3.m
-subplot(2,4,5)
-plot_structure_1K(1,dependency_directory,output_directory)
-
-subplot(2,4,6)
-plot_structure_1K(2,dependency_directory,output_directory)
-
-
-%M
-%rare vs common in 1K
-%from analyse1kSecondary_v3.m
-subplot(2,4,7)
-plot_structure_rare_common(1,dependency_directory,output_directory)
-
-subplot(2,4,8)
-plot_structure_rare_common(2,dependency_directory,output_directory)
-
-
-
-
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_4_2'],'-dsvg','-r0')
-print([output_directory 'figure_4_2'],'-djpeg','-r300')
+print([output_directory 'figure_4'],'-dsvg','-r0')
+print([output_directory 'figure_4'],'-djpeg','-r300')
 
 
 
 %Figure S4
 figure('units','normalized','outerposition',[0 0 1 1])
 
-%A
-%synonymous reconstructions
-%GCS1
-subplot(2,8,1)
-plot_validation_ira2('YDL226C','YDJ8528',...
-    dependency_directory,output_directory)
-
-
-%AAT2
-subplot(2,8,2)
-plot_validation_ira2('YLR027C','YDJ8527',...
-    dependency_directory,output_directory)
 
 
 %structure property histograms
-%B
+%A
 
 %SASA
-subplot(2,4,2)
+subplot(2,4,1)
 plot_structure_histogram(1,5,dependency_directory,output_directory)
 
 
 %neighbors
-subplot(2,4,3)
+subplot(2,4,2)
 plot_structure_histogram(2,1,dependency_directory,output_directory)
 
 
-%C
-%SASA split by structure and Ts/Tv
-subplot(2,2,3)
-plot_structure_ts_tv(1,dependency_directory,output_directory)
-
-
-%D
-%histograms for 1K rare/common
-%SASA
-subplot(2,4,7)
-plot_structure_histogram_1K(1,5,dependency_directory,output_directory)
-
-
-%neighbors
-subplot(2,4,8)
-plot_structure_histogram_1K(2,1,dependency_directory,output_directory)
 
 
 
@@ -617,6 +590,9 @@ print([output_directory 'figure_S4'],'-djpeg','-r300')
 
 
 close all
+
+
+fmdynt
 
 
 %Figure 5
@@ -976,17 +952,24 @@ print([output_directory 'figure_S7'],'-djpeg','-r300')
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
+
+%A
+%ASE reproducibility
+%from pQTLplotsForManuscript.m
+plot_ase_reproducibility(dependency_directory,output_directory)
+
+
 %A
 %sensitivity from simulations
 %from analyzePqtlSims.m
-subplot(2,4,1)
+subplot(2,4,5)
 plot_strain_sims(dependency_directory,output_directory)
 
 
 
 %B
 %heritability cross-plot
-subplot(2,4,2)
+subplot(2,4,5)
 plot_heritability_parents(dependency_directory,output_directory)
     
 

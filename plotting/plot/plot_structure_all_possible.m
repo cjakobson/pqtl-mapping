@@ -29,14 +29,22 @@ function []= plot_structure_all_possible(property_idx,dependency_directory,outpu
     
     %missense
     to_plot{1}=properties_sim{1,property_idx};
-    to_plot{2}=properties_all_segregating{property_idx};
+    %ts only
+    temp_idx1=mis_ts==1;
+    to_plot{2}=properties_sim{1,property_idx}(temp_idx1);
+    %tv only
+    to_plot{3}=properties_sim{1,property_idx}(~temp_idx1);
+    %all segregating
+    to_plot{4}=properties_all_segregating{property_idx};
     
     hold on
     easy_box(to_plot)
     ylim([0 yLim2(property_idx)])
-    xticklabels({'all poss.','all segr.'})
-    [p h]=ranksum(to_plot{1},to_plot{2});
-    text(1.5,35,num2str(p))
+    xticklabels({'all poss.','Ts','Tv','all segr.'})
+    for i=1:3
+        [p h]=ranksum(to_plot{i},to_plot{4});
+        text((i+4)/2,35,num2str(p))
+    end
     title(property_labels{property_idx})
 
 
