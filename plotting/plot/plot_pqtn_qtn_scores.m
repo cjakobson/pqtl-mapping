@@ -1,4 +1,4 @@
-function [] = plot_pqtn_qtn_scores(gene_name,locus_to_use,dependency_directory,output_directory)
+function [] = plot_pqtn_qtn_scores(plot_offset,gene_name,locus_to_use,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -16,7 +16,7 @@ function [] = plot_pqtn_qtn_scores(gene_name,locus_to_use,dependency_directory,o
         calculate_pqtn_qtn_scores(gene_name,locus_to_use,dependency_directory,output_directory);
 
 
-    subplot(2,4,7)
+    subplot(2,4,plot_offset+1)
     hold on
     for i=1:50%length(sortIdx)
         plot((1:length(pqtn_sorted{i}))-i/5,pqtn_sorted{i}-i/10,'k','LineWidth',0.5)
@@ -30,7 +30,7 @@ function [] = plot_pqtn_qtn_scores(gene_name,locus_to_use,dependency_directory,o
     axis square
 
 
-    subplot(2,4,8)
+    subplot(2,4,plot_offset+2)
     hold on
     for i=1:length(qtn_sorted)
         plot((1:length(qtn_sorted{i}))-i/5,qtn_sorted{i}-i/10,'k','LineWidth',0.5)

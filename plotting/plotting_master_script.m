@@ -369,8 +369,8 @@ plot_npqtls_per_protein(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S2'],'-dsvg','-r0')
-print([output_directory 'figure_S2'],'-djpeg','-r300')
+print([output_directory 'figure_S2_1'],'-dsvg','-r0')
+print([output_directory 'figure_S2_1'],'-djpeg','-r300')
 
 
 close all
@@ -424,8 +424,8 @@ plot_pqtl_sign_test(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_3'],'-dsvg','-r0')
-print([output_directory 'figure_3'],'-djpeg','-r300')
+print([output_directory 'figure_3_1'],'-dsvg','-r0')
+print([output_directory 'figure_3_1'],'-djpeg','-r300')
 
 
 
@@ -467,8 +467,8 @@ plot_sign_test_by_strain(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S3'],'-dsvg','-r0')
-print([output_directory 'figure_S3'],'-djpeg','-r300')
+print([output_directory 'figure_S3_1'],'-dsvg','-r0')
+print([output_directory 'figure_S3_1'],'-djpeg','-r300')
 
 
 
@@ -546,8 +546,8 @@ plot_structure_pqtn(2,dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_4'],'-dsvg','-r0')
-print([output_directory 'figure_4'],'-djpeg','-r300')
+print([output_directory 'figure_4_1'],'-dsvg','-r0')
+print([output_directory 'figure_4_1'],'-djpeg','-r300')
 
 
 
@@ -574,18 +574,88 @@ plot_structure_histogram(2,1,dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S4'],'-dsvg','-r0')
-print([output_directory 'figure_S4'],'-djpeg','-r300')
+print([output_directory 'figure_S4_1'],'-dsvg','-r0')
+print([output_directory 'figure_S4_1'],'-djpeg','-r300')
 
 
 close all
 
 
-fmdynt
+
 
 
 %Figure 5
 figure('units','normalized','outerposition',[0 0 1 1])
+
+
+
+%A
+%n/a
+
+
+%B
+%JH made fig
+
+
+%C
+%n/a
+
+
+%D
+%correlations amongst complex members
+%from plotCorrelations.m
+subplot(2,8,5)
+plot_complex_correlation(dependency_directory,output_directory)
+
+
+%E
+%Biogrid overlap summary
+subplot(2,8,2)
+plot_biogrid_overlaps(dependency_directory,output_directory)
+
+
+
+%F
+%SEC61 and Sss1
+subplot(2,8,1)
+plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
+
+
+%G
+%IRA2 and Bcy1
+subplot(2,8,3)
+plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
+
+
+%H
+%n/a
+
+
+%I
+%n/a
+
+
+%J
+%Fre1 pseudo-volcano
+%from plotCorrelations.m
+subplot(2,4,4)
+plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
+
+
+
+%K
+%n/a
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_5_1'],'-dsvg','-r0')
+print([output_directory 'figure_5_1'],'-djpeg','-r300')
+
+
+
+%Figure S5
+figure('units','normalized','outerposition',[0 0 1 1])
+
 
 
 %A
@@ -603,80 +673,67 @@ plot_abundance_correlation(gene_name1,gene_name2,...
     dependency_directory,output_directory)
 
 
-%B
-%n/a
+%B 
+%correlation in correlations
+%from correlaitonsAcrossExps.m
+plot_corr_across_exps(2,dependency_directory,output_directory)
+
+
 
 
 %C
-%JH made fig
-
-
-%D
-%correlations amongst complex members
-%from plotCorrelations.m
-subplot(2,8,5)
-plot_complex_correlation(dependency_directory,output_directory)
-
-
-%E
 %ATP synthase inset
 %from complexCovaration.m
 gene_list={'YBL099W','YJR121W','YBR039W','YPL078C','YKL016C',...
     'YPL271W','YDR377W','YML081C-A','YOL077W-A','YPR020W'};
-subplot(2,4,4)
+subplot(2,4,5)
 plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
 
 
-%F
-%coexpression vs SWATH correlation quintiles
-%from plotCorrelations.m
-subplot(2,4,5)
-plot_string_quintiles(4,dependency_directory,output_directory)
-
-
-%cellmap vs SWATH correlation quintiles
-%from plotCorrelations.m
-subplot(2,4,6)
-plot_string_quintiles(9,dependency_directory,output_directory)
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_5'],'-dsvg','-r0')
-print([output_directory 'figure_5'],'-djpeg','-r300')
-
-
-
-%Figure S5
-figure('units','normalized','outerposition',[0 0 1 1])
-
-
-%A 
-%correlation in correlations
-%from correlaitonsAcrossExps.m
-plot_corr_across_exps(dependency_directory,output_directory)
-
-
-
-%B
+%C
 %some other cross-plots
-subplot(2,4,3)
+subplot(2,4,6)
 gene_name1='YNL037C';   %Idh1
 gene_name2='YOR136W';   %Idh2
 plot_abundance_correlation(gene_name1,gene_name2,...
     dependency_directory,output_directory)
 
 
-subplot(2,4,4)
+subplot(2,4,7)
 gene_name1='YIL125W';   %Kgd1
 gene_name2='YDR148C';   %Kgd2
 plot_abundance_correlation(gene_name1,gene_name2,...
     dependency_directory,output_directory)
 
 
+
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S5'],'-dsvg','-r0')
-print([output_directory 'figure_S5'],'-djpeg','-r300')
+print([output_directory 'figure_S5_1'],'-dsvg','-r0')
+print([output_directory 'figure_S5_1'],'-djpeg','-r300')
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+
+%E
+%coexpression vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,8)
+plot_string_quintiles(4,dependency_directory,output_directory)
+
+%F
+%cellmap vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,8)
+plot_string_quintiles(9,dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S5_2'],'-dsvg','-r0')
+print([output_directory 'figure_S5_2'],'-djpeg','-r300')
 
 
 
@@ -688,80 +745,54 @@ close all
 %Figure 6
 figure('units','normalized','outerposition',[0 0 1 1])
 
+
 %A
-%SEC61 and Sss1
+%ERG11 phenotypic mapping
+%from erg11dissection.m
+locus1=4972;  %Lys433Asn
+locus2=4974;  %122014T>C
 subplot(2,8,1)
-plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
+plot_qtl_effect(locus1,locus2,'48h fluconazole_100uM-rad',dependency_directory,output_directory)
+
 
 
 %B
-%Biogrid overlap summary
+%ERG11 MS validation
+%from plotValidation1.m
 subplot(2,8,2)
-plot_biogrid_overlaps(dependency_directory,output_directory)
+plot_validation_erg11(dependency_directory,output_directory)
 
 
 %C
-%IRA2 and Bcy1
+%ERG11 CRISPEY phenotype validation
+%from readSgaDataErg11FlcGrad.m
 subplot(2,8,3)
-plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
+plot_flc_erg11(dependency_directory,output_directory)
+
 
 
 %D
-%n/a
+%NCP1 QTN vs pQTN
+subplot(2,4,3)
 
 
 %E
-%n/a
+%NCP1 phenotype
+subplot(2,8,7)
+plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',0.9,1.2,dependency_directory,output_directory)
 
 
 %F
-%Fre1 pseudo-volcano
-%from plotCorrelations.m
-subplot(2,4,4)
-plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
-
+%n/a
 
 
 %G
-%n/a
-
+%pQTN and QTN scores for IRA2
+%from mcr1pQtnScores.m
+plot_pqtn_qtn_scores(4,'YOL081W',10191,dependency_directory,output_directory)
 
 
 %H
-%pseudo-miami plot for pQTLs vs QTLs
-subplot(2,2,3)
-plot_miami('YOL081W',dependency_directory,output_directory)
-
-
-
-%I
-%pQTN and QTN scores for IRA2
-%from mcr1pQtnScores.m
-plot_pqtn_qtn_scores('YOL081W',10191,dependency_directory,output_directory)
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_6_1'],'-dsvg','-r0')
-print([output_directory 'figure_6_1'],'-djpeg','-r300')
-
-
-
-figure('units','normalized','outerposition',[0 0 1 1])
-
-
-%J
-%n/a
-
-
-%K
-%IRA2 reconstruction
-%from plotValidation3.m
-plot_ira2_validation(dependency_directory,output_directory)
-
-
-
-%L
 %phenotyping on ethanol
 %from readSgaDataPQtnPhen.m
 subplot(2,8,9)
@@ -771,11 +802,12 @@ subplot(2,8,10)
 plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
 
-
-
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_6_2'],'-dsvg','-r0')
-print([output_directory 'figure_6_2'],'-djpeg','-r300')
+print([output_directory 'figure_6_1'],'-dsvg','-r0')
+print([output_directory 'figure_6_1'],'-djpeg','-r300')
+
+
+
 
 
 
@@ -784,97 +816,111 @@ print([output_directory 'figure_6_2'],'-djpeg','-r300')
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
+
 %A
-%IRA2 mapping vs deletion
-%from compareMicroarray.m
-subplot(2,4,1)
-plot_pqtl_5K('YOL081W',dependency_directory,output_directory)
+%NCP1 phenotype on glc
+subplot(2,8,1)
+plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',0.9,1.2,dependency_directory,output_directory)
 
 
 %B
+%NCP1 validation effect on Erg11 levels
+subplot(2,8,2)
+plot_validation_cis('ERG11','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+
+
+%C
+%pseudo-miami plot for pQTLs vs QTLs
+subplot(2,2,2)
+plot_miami('YOL081W',dependency_directory,output_directory)
+
+
+
+
+%D
+%IRA2 mapping vs deletion
+%from compareMicroarray.m
+subplot(2,4,5)
+plot_pqtl_5K('YOL081W',dependency_directory,output_directory)
+
+
+
+%E
+%IRA2 reconstruction
+%from plotValidation3.m
+plot_ira2_validation(5,dependency_directory,output_directory)
+
+
+%F
 %IRA2 phenotyping in glucose
-subplot(2,8,3)
+subplot(2,8,15)
 plot_pqtn_phenotyping('8578_RM11_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
-subplot(2,8,4)
+subplot(2,8,16)
 plot_pqtn_phenotyping('8529_YJM975_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
 
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S6'],'-dsvg','-r0')
-print([output_directory 'figure_S6'],'-djpeg','-r300')
+print([output_directory 'figure_S6_1'],'-dsvg','-r0')
+print([output_directory 'figure_S6_1'],'-djpeg','-r300')
 
 
 close all
 
 
 
+
+
 figure('units','normalized','outerposition',[0 0 1 1])
 %Figure 7
 
-%A
-%effect size of pQTLs vs QTLs
-subplot(2,8,1)
-plot_pqtl_qtl_effect_size(dependency_directory,output_directory)
 
+
+%A
+%growth QTL rarefaction
+%from pQTLvsQTL.m
+subplot(2,4,1)
+plot_qtl_rarefaction(dependency_directory,output_directory)
 
 %B
-%ERG11 phenotypic mapping
-%from erg11dissection.m
-locus1=4972;  %Lys433Asn
-locus2=4974;  %122014T>C
-subplot(2,8,2)
-plot_qtl_effect(locus1,locus2,'48h fluconazole_100uM-rad',dependency_directory,output_directory)
+%effect size of pQTLs vs QTLs
+subplot(2,8,3)
+plot_pqtl_qtl_effect_size(dependency_directory,output_directory)
 
 
 
 %C
-%ERG11 MS validation
-%from plotValidation1.m
-subplot(2,8,3)
-plot_validation_erg11(dependency_directory,output_directory)
-
-
-%D
-%ERG11 CRISPEY phenotype validation
-%from readSgaDataErg11FlcGrad.m
-subplot(2,8,4)
-plot_flc_erg11(dependency_directory,output_directory)
-
-
-%E
-%growth QTL rarefaction
-%from pQTLvsQTL.m
-subplot(2,4,3)
-plot_qtl_rarefaction(dependency_directory,output_directory)
-
-
-
-%F
 %distance from phenotypic QTNs to pQTNs/random loci
 %from pQTLvsQTL.m
-subplot(2,4,4)
+subplot(2,4,3)
 plot_qtl_pqtl_distance(dependency_directory,output_directory)
 
 
-%G
+%D
 %n/a
 
 
-%H
+%E
 %distance from phenotypic QTNs to pQTNs/min glc QTNs
 %from pQTLvsQTL.m
-subplot(2,4,5)
+subplot(2,4,4)
 plot_qtl_pqtl_min_glc_distance(dependency_directory,output_directory)
 
 
 
-%I
+%F
 %example miami plot for two phenotypes
-subplot(2,2,4)
+subplot(2,2,3)
 plot_qtl_miami('rapamycin_5uM','tebuconazole_0.6uM',dependency_directory,output_directory)
+
+
+%G
+%heatmap of QTN overlap
+%from pQTLvsQTL.m
+subplot(2,4,7)
+plot_overlap_heatmap(dependency_directory,output_directory)
 
 
 
@@ -884,25 +930,6 @@ print([output_directory 'figure_7_1'],'-djpeg','-r300')
 
 
 
-figure('units','normalized','outerposition',[0 0 1 1])
-%J
-%heatmap of QTN overlap
-%from pQTLvsQTL.m
-subplot(2,4,1)
-plot_overlap_heatmap(dependency_directory,output_directory)
-
-
-%K
-%NCP1 phenotype
-subplot(2,8,3)
-plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',0.9,1.2,dependency_directory,output_directory)
-
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_7_2'],'-dsvg','-r0')
-print([output_directory 'figure_7_2'],'-djpeg','-r300')
 
 
 
@@ -917,57 +944,31 @@ plot_effect_size_correlation(dependency_directory,output_directory)
 
 
 
+
 %B
-%NCP1 phenotype on glc
-subplot(2,8,3)
-plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',0.9,1.2,dependency_directory,output_directory)
-
-
-%C
-%NCP1 validation effect on Erg11 levels
-subplot(2,6,4)
-plot_validation_cis('ERG11','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
-
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S7'],'-dsvg','-r0')
-print([output_directory 'figure_S7'],'-djpeg','-r300')
-
-
-
-%Figure S8
-figure('units','normalized','outerposition',[0 0 1 1])
-
-
-
-%A
-%ASE reproducibility
-%from pQTLplotsForManuscript.m
-plot_ase_reproducibility(dependency_directory,output_directory)
-
-
-%A
 %sensitivity from simulations
 %from analyzePqtlSims.m
-subplot(2,4,5)
+subplot(2,4,2)
 plot_strain_sims(dependency_directory,output_directory)
 
 
-
-%B
+%C
 %heritability cross-plot
-subplot(2,4,5)
+subplot(2,4,3)
 plot_heritability_parents(dependency_directory,output_directory)
-    
+
+
+%D
+%ASE reproducibility
+%from pQTLplotsForManuscript.m
+plot_ase_reproducibility(4,dependency_directory,output_directory)
 
 
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S8'],'-dsvg','-r0')
-print([output_directory 'figure_S8'],'-djpeg','-r300')
+print([output_directory 'figure_S7_1'],'-dsvg','-r0')
+print([output_directory 'figure_S7_1'],'-djpeg','-r300')
 
 
 

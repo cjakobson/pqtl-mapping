@@ -28,8 +28,11 @@ function []=plot_pqtls_foldchange(dependency_directory,output_directory)
     
     
     [fold_change,p_val]=calculate_parental_mean_fc(dependency_directory,output_directory);
-
+    
     fold_change=abs(log2(fold_change));
+    
+    sum(fold_change>log2(1.5))
+    sum(fold_change>log2(2))
     
 
     hold on

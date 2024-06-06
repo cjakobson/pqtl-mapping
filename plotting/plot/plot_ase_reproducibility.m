@@ -1,4 +1,4 @@
-function []=plot_ase_reproducibility(dependency_directory,output_directory)
+function []=plot_ase_reproducibility(plot_offset,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -35,7 +35,7 @@ function []=plot_ase_reproducibility(dependency_directory,output_directory)
         
         for j=(i+1):3
             
-            subplot(2,3,m)
+            subplot(2,3,plot_offset+m)
             hold on
             scatter(v_ase(:,i),v_ase(:,j),10,'k','filled')
             axis square

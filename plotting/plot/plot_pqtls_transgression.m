@@ -35,6 +35,8 @@ function []=plot_pqtls_transgression(dependency_directory,output_directory)
 
     transgression=log2((transgressive_mat(:,4)./transgressive_mat(:,3)))-...
             log2((parent_max./parent_min));
+        
+    sum(transgression>0)
     
 
     hold on

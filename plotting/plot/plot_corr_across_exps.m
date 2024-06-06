@@ -1,4 +1,4 @@
-function []=plot_corr_across_exps(dependency_directory,output_directory)
+function []=plot_corr_across_exps(plot_offset,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -15,7 +15,7 @@ function []=plot_corr_across_exps(dependency_directory,output_directory)
     v1=reshape(prot_corr,[],1);
     v2=reshape(prot_corr_1K,[],1);
     
-    subplot(2,4,1)
+    subplot(2,4,plot_offset+1)
     hold on
     hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto')%,'EdgeColor','none','FaceColor','interp')
     xlim([-0.6 0.6])
@@ -31,7 +31,7 @@ function []=plot_corr_across_exps(dependency_directory,output_directory)
     v1=reshape(prot_corr,[],1);
     v2=reshape(prot_corr_5K,[],1);
     
-    subplot(2,4,2)
+    subplot(2,4,plot_offset+2)
     hold on
     hist3([v1 v2],'Ctrs',{-0.6:0.02:0.6, -0.6:0.02:0.6},'CdataMode','auto')%,'EdgeColor','none','FaceColor','interp')
     xlim([-0.6 0.6])

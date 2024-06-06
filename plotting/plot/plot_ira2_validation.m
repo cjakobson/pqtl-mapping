@@ -1,4 +1,4 @@
-function [] = plot_ira2_validation(dependency_directory,output_directory)
+function [] = plot_ira2_validation(plot_offset,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -77,7 +77,7 @@ function [] = plot_ira2_validation(dependency_directory,output_directory)
 
 
 
-    subplot(2,4,1)
+    subplot(2,4,plot_offset+1)
     v1=yjm_fc;
     v2=mapping_beta;
     hold on
@@ -108,7 +108,7 @@ function [] = plot_ira2_validation(dependency_directory,output_directory)
     v1=rm_fc;
     v2=mapping_beta;
     
-    subplot(2,4,2)
+    subplot(2,4,plot_offset+2)
     hold on
     scatter(log2(v1),v2,10,'k','filled')
     axis square
