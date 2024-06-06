@@ -89,7 +89,7 @@ plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_
 
 
 
-%F
+%J
 %variance explained
 %from pQTLplotsForManuscript.m
 subplot(2,4,7)
@@ -97,7 +97,7 @@ plot_heritability_explained(dependency_directory,output_directory)
 
 
 
-%G
+%K
 %pQTL rarefaction
 %from pQTLplotsForManuscript.m
 subplot(2,4,8)
@@ -210,35 +210,24 @@ subplot(2,4,5)
 plot_pqtls_transgression(dependency_directory,output_directory)
 
 
+%S
+%n pQTLs vs normalized CV
+subplot(2,4,6)
+plot_pqtls_norm_cv(dependency_directory,output_directory)
+
+
+
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_S1_2'],'-dsvg','-r0')
 print([output_directory 'figure_S1_2'],'-djpeg','-r300')
 
 
 
-figure('units','normalized','outerposition',[0 0 1 1])
-%M
-%nPqtls as function of parental FC
-%from proteomicsQc.m
-subplot(2,3,1)
-plot_npqtls_fc(dependency_directory,output_directory)
-
-
-%N
-%nPqtls as function of transgression
-%from proteomicsQc.m
-subplot(2,3,2)
-plot_npqtls_transgression(dependency_directory,output_directory)
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S1_3'],'-dsvg','-r0')
-print([output_directory 'figure_S1_3'],'-djpeg','-r300')
-
 
 
 close all
+
+
 
 
 

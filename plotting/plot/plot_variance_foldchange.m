@@ -32,13 +32,13 @@ function []=plot_variance_foldchange(dependency_directory,output_directory)
     
     [fold_change,p_val]=calculate_parental_mean_fc(dependency_directory,output_directory);
 
-    fold_change=log2(fold_change);
+    fold_change=abs(log2(fold_change));
     
 
     hold on
     axis square
     scatter(fold_change,total_var_exp,10,'k','filled')
-    xlim([-2 5])
+    xlim([0 5])
     ylim([0 0.8])
     %set(gca,'XScale','log')
     %plot(xlim,ylim,':r')

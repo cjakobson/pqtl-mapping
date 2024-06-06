@@ -26,27 +26,44 @@ function []=plot_pqtls_foldchange(dependency_directory,output_directory)
     end
 
     
-    
-    [fold_change,p_val]=calculate_parental_mean_fc(dependency_directory,output_directory);
+    rm_mat=input_mat(:,rm_idx);
+    yjm_mat=input_mat(:,yjm_idx);
+    f6_mat=input_mat(:,f6_idx);
 
-    fold_change=abs(log2(fold_change));
+    for i=1:length(orf_names)
+
+        temp_rm_cv=std(rm_mat(i,:),[],'omitnan')/mean(rm_mat(i,:),'omitnan');
+        temp_yjm_cv=std(yjm_mat(i,:),[],'omitnan')/mean(yjm_mat(i,:),'omitnan');
+
+        cv1(i)=mean([temp_rm_cv temp_yjm_cv]);
+
+        cv2(i)=std(f6_mat(i,:),[],'omitnan')/mean(f6_mat(i,:),'omitnan');
+
+    end
+
+    cv1=cv1';
+    cv2=cv2';
+
+    norm_cv=cv2./cv1;
+
     
 
     hold on
     axis square
-    scatter(fold_change,n_pqtls,10,'k','filled')
-    xlim([0 5])
+    scatter(norm_cv,n_pqtls,10,'k','filled')
+    xlim([0 4])
     ylim([0 35])
     %set(gca,'XScale','log')
     %plot(xlim,ylim,':r')
-    xlabel('log_2fold change')
+    xlabel('norm. CV')
     ylabel('n pQTLs')
     
-    [r p]=corr(fold_change,n_pqtls','rows','complete');
+    [r p]=corr(norm_cv,n_pqtls','rows','complete');
     v_xlim=xlim;
     v_ylim=ylim;
     text(0.8*v_xlim(2),0.9*v_ylim(2),num2str(r))
     text(0.8*v_xlim(2),0.8*v_ylim(2),num2str(p))
+    
     
 end
 
