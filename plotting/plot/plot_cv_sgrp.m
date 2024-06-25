@@ -1,5 +1,5 @@
 %plot heritability against mean abundance
-function []=plot_heritability_abundance(dependency_directory,output_directory)
+function []=plot_cv_sgrp(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -16,33 +16,43 @@ function []=plot_heritability_abundance(dependency_directory,output_directory)
     
     rm_mat=input_mat(:,rm_idx);
     yjm_mat=input_mat(:,yjm_idx);
+    f6_mat=input_mat(:,f6_idx);
+    sgrp_mat=input_mat(:,sgrp_idx);
+
 
     for i=1:length(orf_names)
 
         temp_rm_cv=std(rm_mat(i,:),[],'omitnan')/mean(rm_mat(i,:),'omitnan');
         temp_yjm_cv=std(yjm_mat(i,:),[],'omitnan')/mean(yjm_mat(i,:),'omitnan');
 
-        cv(i)=mean([temp_rm_cv temp_yjm_cv]);
+        f6_cv(i)=std(f6_mat(i,:),[],'omitnan')/mean(f6_mat(i,:),'omitnan');
+        sgrp_cv(i)=std(sgrp_mat(i,:),[],'omitnan')/mean(sgrp_mat(i,:),'omitnan');
+        
+        parent_cv(i)=mean([temp_rm_cv temp_yjm_cv]);
 
     end
 
-    cv=cv';
+   
+    v1=f6_cv./parent_cv;
+    v2=sgrp_cv./parent_cv;
     
-    %cv(isnan(cv))=0;
-    
-    [~,~,h_squared_mean,~]=...
-        calculate_heritability(dependency_directory,output_directory);
 
     hold on
     axis square
-    %size dots by CV
-    scatter(mean(input_mat,2,'omitnan'),h_squared_mean,10,'k','filled')
-    ylim([0.2 1])
-    xlim([1e3 2e6])
-    set(gca,'XScale','log')
+    scatter(v2,v1,10,'k','filled')
+    ylim([0 5])
+    xlim([0 10])
+    %set(gca,'XScale','log')
     %plot(xlim,ylim,':r')
-    ylabel('mean H^2')
-    xlabel('mean abundance')
+    xlabel('C.V. SGRP/C.V. parents')
+    ylabel('C.V. F6/C.V. parents')
+    
+    
+    [r p]=corr(v1',v2','rows','complete');
+    v_xlim=xlim;
+    v_ylim=ylim;
+    text(0.8*v_xlim(2),0.9*v_ylim(2),num2str(r))
+    text(0.8*v_xlim(2),0.8*v_ylim(2),num2str(p))
     
     
 end

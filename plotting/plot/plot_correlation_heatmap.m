@@ -9,7 +9,7 @@ function []=plot_correlation_heatmap(gene_list,dependency_directory,output_direc
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
 
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,orf_names,strain_index]=...
             parse_raw_abundance(dependency_directory,output_directory);
 
     mat_to_use=input_mat(:,f6_idx);

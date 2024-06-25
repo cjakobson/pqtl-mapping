@@ -49,33 +49,45 @@ plot_main_volcano(dependency_directory,output_directory)
 %D
 %parents and F6 boxplots
 %from pQTLplotsForManuscript.m
-%Gap1
+
+%Mcr1
 subplot(2,8,5)
+plot_parents_f6_boxplot('YKL150W',dependency_directory,output_directory)
+
+%Gap1
+subplot(2,8,6)
 plot_parents_f6_boxplot('YKR039W',dependency_directory,output_directory)
 
 %Rnr4
-subplot(2,8,6)
+subplot(2,8,7)
 plot_parents_f6_boxplot('YGR180C',dependency_directory,output_directory)
+
+%Erg11
+subplot(2,8,8)
+plot_parents_f6_boxplot('YHR007C',dependency_directory,output_directory)
+
+
+
 
 
 %E
 %heritability against abundance
 %from pQTLplotsForManuscript.m
-subplot(2,4,4)
+subplot(2,4,5)
 plot_heritability_abundance(dependency_directory,output_directory)
 
 
 %F
-%transgression against abundance
-subplot(2,4,5)
-plot_transgression_abundance(dependency_directory,output_directory)
+%CV SGRP vs CV F6
+subplot(2,4,6)
+plot_cv_sgrp(dependency_directory,output_directory)
 
 
 
 %G
 %effect of locus in F6 progeny [RM/YJM/RM allele/YJM allele]
 %from erg11dissection.m
-subplot(2,8,11)
+subplot(2,8,13)
 plot_locus_effect('YKL150W','Mcr1',6952,1e5,dependency_directory,output_directory)
 
 
@@ -84,7 +96,7 @@ plot_locus_effect('YKL150W','Mcr1',6952,1e5,dependency_directory,output_director
 
 %I
 %Mcr1 cis validation
-subplot(2,8,12)
+subplot(2,8,14)
 plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
 
 
@@ -92,19 +104,8 @@ plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_
 %J
 %variance explained
 %from pQTLplotsForManuscript.m
-subplot(2,4,7)
-plot_heritability_explained(dependency_directory,output_directory)
-
-
-
-%K
-%pQTL rarefaction
-%from pQTLplotsForManuscript.m
 subplot(2,4,8)
-plot_rarefaction(dependency_directory,output_directory)
-
-
-
+plot_heritability_explained(dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
@@ -112,114 +113,94 @@ print([output_directory 'figure_1_1'],'-dsvg','-r0')
 print([output_directory 'figure_1_1'],'-djpeg','-r300')
 
 
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%K
+%pQTL rarefaction
+%from pQTLplotsForManuscript.m
+subplot(2,4,1)
+plot_rarefaction(dependency_directory,output_directory)
+
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_1_2'],'-dsvg','-r0')
+print([output_directory 'figure_1_2'],'-djpeg','-r300')
+
+
 
 %Figure S1
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
-%A-G
+%A-D
 %JH did plots for figures
 
 
-%H
+%E
 %parent od boxplot
 %from proteomicsQc.m
 subplot(2,8,1)
 plot_od_boxplot(dependency_directory,output_directory)
 
 
-%I
-%fold change vs abundance
-subplot(2,4,2)
-plot_foldchange_abundance(dependency_directory,output_directory)
 
-
-
-%J
+%F
 %heritability vs C.V.
-subplot(2,4,3)
+subplot(2,4,2)
 plot_heritability_cv(dependency_directory,output_directory)
 
 
-%K
+%G
 %OD correlations
 %from proteomicsQc.m
 
 %Arg4
-subplot(2,4,5)
+subplot(2,4,3)
 plot_od_correlations('YHR018C',dependency_directory,output_directory)
 
 %Aco2
-subplot(2,4,6)
+subplot(2,4,4)
 plot_od_correlations('YJL200C',dependency_directory,output_directory)
 
 
 
-%L
+%H
 %local vs global mapping betas
 %from pQTLplotsForManuscript.m
-subplot(2,4,7)
+subplot(2,4,5)
 plot_local_global_beta(dependency_directory,output_directory)
 
 
-%M
+%I
 %mapping sensitivity
 %from analyzePqtlSims.m
-subplot(2,4,8)
+subplot(2,4,6)
 plot_sensitivity_simulations(dependency_directory,output_directory)
+
+
+
+%J
+%boxplot zoom in
+%JH did plot for figures
+subplot(2,4,7)
+plot_zoom_volcano(dependency_directory,output_directory)
+
+
+%K
+%n pQTLs vs normalized CV
+subplot(2,4,8)
+plot_pqtls_norm_cv(dependency_directory,output_directory)
+
 
 
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_S1_1'],'-dsvg','-r0')
 print([output_directory 'figure_S1_1'],'-djpeg','-r300')
-
-
-
-figure('units','normalized','outerposition',[0 0 1 1])
-
-
-%N
-%total variance explained vs log2 fold change
-subplot(2,4,1)
-plot_variance_foldchange(dependency_directory,output_directory)
-
-%O
-%total variance explained vs transgression
-subplot(2,4,2)
-plot_variance_transgression(dependency_directory,output_directory)
-
-
-
-%P
-%boxplot zoom in
-%JH did plot for figures
-subplot(2,4,3)
-plot_zoom_volcano(dependency_directory,output_directory)
-
-
-%Q
-%n pQTLs vs fold change
-subplot(2,4,4)
-plot_pqtls_foldchange(dependency_directory,output_directory)
-
-
-%R
-%n pQTLs vs transgression
-subplot(2,4,5)
-plot_pqtls_transgression(dependency_directory,output_directory)
-
-
-%S
-%n pQTLs vs normalized CV
-subplot(2,4,6)
-plot_pqtls_norm_cv(dependency_directory,output_directory)
-
-
-
-set(gcf,'PaperPositionMode','auto')
-print([output_directory 'figure_S1_2'],'-dsvg','-r0')
-print([output_directory 'figure_S1_2'],'-djpeg','-r300')
 
 
 
@@ -1002,6 +983,44 @@ print([output_directory 'figure_S7_1'],'-djpeg','-r300')
 close all
 
 
+%old stuff from 1/S1
+
+%transgression against abundance
+% subplot(2,4,5)
+% plot_transgression_abundance(dependency_directory,output_directory)
+
+
+%I
+%fold change vs abundance
+% subplot(2,4,2)
+% plot_foldchange_abundance(dependency_directory,output_directory)
+
+% 
+% 
+% %N
+% %total variance explained vs log2 fold change
+% subplot(2,4,1)
+% plot_variance_foldchange(dependency_directory,output_directory)
+% 
+% %O
+% %total variance explained vs transgression
+% subplot(2,4,2)
+% plot_variance_transgression(dependency_directory,output_directory)
+% 
+% 
+% 
+% 
+% %Q
+% %n pQTLs vs fold change
+% subplot(2,4,4)
+% plot_pqtls_foldchange(dependency_directory,output_directory)
+% 
+% 
+% %R
+% %n pQTLs vs transgression
+% subplot(2,4,5)
+% plot_pqtls_transgression(dependency_directory,output_directory)
+% 
 
 
 toc

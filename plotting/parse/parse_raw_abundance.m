@@ -1,6 +1,6 @@
 %parse strain names and raw abundance data
-function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
-    parse_raw_abundance(dependency_directory,output_directory)
+function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,...
+    orf_names,strain_index]=parse_raw_abundance(dependency_directory,output_directory)
 
     input_data=readtable([dependency_directory '211031_SegregantProteomicsData_DetectionThreshold80_genes_ORF.tsv'],...
         'FileType','text');
@@ -36,6 +36,10 @@ function [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_id
     rm_idx=find(ismember(strain_names,'RM11'));
     yjm_idx=find(ismember(strain_names,'YJM975'));
     f6_idx=find(ismember(strain_names,'F6'));
+    
+    sgrp_idx=find(~ismember(strain_names,'RM11').*...
+        ~ismember(strain_names,'YJM975').*...
+        ~ismember(strain_names,'F6'));
 
 end
 

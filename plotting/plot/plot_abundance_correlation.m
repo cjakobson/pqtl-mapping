@@ -9,7 +9,7 @@ function [] = plot_abundance_correlation(gene_name1,gene_name2,dependency_direct
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
     
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,orf_names,strain_index]=...
         parse_raw_abundance(dependency_directory,output_directory);
     
     protein_idx1=ismember(orf_names,gene_name1);

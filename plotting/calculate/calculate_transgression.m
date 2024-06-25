@@ -1,6 +1,6 @@
 function [transgressive_mat]=calculate_transgression(dependency_directory,output_directory)
 
-    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,orf_names,strain_index]=...
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,orf_names,strain_index]=...
         parse_raw_abundance(dependency_directory,output_directory);
             
             
