@@ -113,6 +113,9 @@ print([output_directory 'figure_1_1'],'-dsvg','-r0')
 print([output_directory 'figure_1_1'],'-djpeg','-r300')
 
 
+
+
+
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
@@ -361,7 +364,7 @@ print([output_directory 'figure_S2_1'],'-djpeg','-r300')
 
 close all
 
-nsaed
+
 
 %Figure 3
 
@@ -601,40 +604,37 @@ plot_correlation_heatmap(table2array(genes_to_plot),...
 
 
 %C
-%mean of parents
-subplot(2,4,2)
-plot_correlation_heatmap_parents(table2array(genes_to_plot),...
-    dependency_directory,output_directory)
-
-
-%D
 %n/a
 
 
-%E
+%D
 %correlations amongst complex members
 %from plotCorrelations.m
 subplot(2,8,5)
 plot_complex_correlation(dependency_directory,output_directory)
 
 
-%F
+%E
 %Biogrid overlap summary
 subplot(2,8,6)
 plot_biogrid_overlaps(dependency_directory,output_directory)
 
 
 
-%G
+%F
 %SEC61 and Sss1
 subplot(2,8,7)
 plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
 
 
-%H
+%G
 %IRA2 and Bcy1
 subplot(2,8,8)
 plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
+
+
+%H
+%n/a
 
 
 %I
@@ -642,10 +642,6 @@ plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directo
 
 
 %J
-%n/a
-
-
-%K
 %Fre1 pseudo-volcano
 %from plotCorrelations.m
 subplot(2,4,5)
@@ -653,7 +649,7 @@ plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
 
 
 
-%L
+%K
 %n/a
 
 
@@ -683,38 +679,12 @@ plot_abundance_correlation(gene_name1,gene_name2,...
     dependency_directory,output_directory)
 
 
+
 %B
-%correlation in correlations
-%from correlaitonsAcrossExps.m
-plot_corr_across_exps(2,dependency_directory,output_directory)
-
-
-
-
-%C
-%ATP synthase inset
-%from complexCovaration.m
-gene_list={'YBL099W','YJR121W','YBR039W','YPL078C','YKL016C',...
-    'YPL271W','YDR377W','YML081C-A','YOL077W-A','YPR020W'};
-subplot(2,4,5)
-plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
-
-
-%C
-%some other cross-plots
-subplot(2,4,6)
-gene_name1='YNL037C';   %Idh1
-gene_name2='YOR136W';   %Idh2
-plot_abundance_correlation(gene_name1,gene_name2,...
+%mean of parents
+subplot(2,4,3)
+plot_correlation_heatmap_parents(table2array(genes_to_plot),...
     dependency_directory,output_directory)
-
-
-subplot(2,4,7)
-gene_name1='YIL125W';   %Kgd1
-gene_name2='YDR148C';   %Kgd2
-plot_abundance_correlation(gene_name1,gene_name2,...
-    dependency_directory,output_directory)
-
 
 
 set(gcf,'PaperPositionMode','auto')
@@ -726,24 +696,69 @@ figure('units','normalized','outerposition',[0 0 1 1])
 
 
 
-%E
-%coexpression vs SWATH correlation quintiles
-%from plotCorrelations.m
-subplot(2,4,1)
-plot_string_quintiles(4,dependency_directory,output_directory)
 
-%F
-%cellmap vs SWATH correlation quintiles
-%from plotCorrelations.m
-subplot(2,4,2)
-plot_string_quintiles(9,dependency_directory,output_directory)
-
+%C
+%correlation in correlations
+%from correlaitonsAcrossExps.m
+plot_corr_across_exps(0,dependency_directory,output_directory)
 
 
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_S5_2'],'-dsvg','-r0')
 print([output_directory 'figure_S5_2'],'-djpeg','-r300')
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+
+%D
+%ATP synthase inset
+%from complexCovaration.m
+gene_list={'YBL099W','YJR121W','YBR039W','YPL078C','YKL016C',...
+    'YPL271W','YDR377W','YML081C-A','YOL077W-A','YPR020W'};
+subplot(2,4,1)
+plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
+
+
+%E
+%some other cross-plots
+subplot(2,4,2)
+gene_name1='YNL037C';   %Idh1
+gene_name2='YOR136W';   %Idh2
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+subplot(2,4,3)
+gene_name1='YIL125W';   %Kgd1
+gene_name2='YDR148C';   %Kgd2
+plot_abundance_correlation(gene_name1,gene_name2,...
+    dependency_directory,output_directory)
+
+
+
+%F
+%coexpression vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,4)
+plot_string_quintiles(4,dependency_directory,output_directory)
+
+%G
+%cellmap vs SWATH correlation quintiles
+%from plotCorrelations.m
+subplot(2,4,5)
+plot_string_quintiles(9,dependency_directory,output_directory)
+
+
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_S5_3'],'-dsvg','-r0')
+print([output_directory 'figure_S5_3'],'-djpeg','-r300')
+
+
 
 
 
@@ -955,25 +970,22 @@ subplot(2,4,1)
 plot_effect_size_correlation(dependency_directory,output_directory)
 
 
-
-
 %B
-%sensitivity from simulations
-%from analyzePqtlSims.m
-subplot(2,4,2)
-plot_strain_sims(dependency_directory,output_directory)
+%suppressor simulations
+plot_suppressor_sim(2,dependency_directory,output_directory)
 
 
 %C
-%heritability cross-plot
-subplot(2,4,3)
-plot_heritability_parents(dependency_directory,output_directory)
+%sensitivity from simulations
+%from analyzePqtlSims.m
+subplot(2,4,5)
+plot_strain_sims(dependency_directory,output_directory)
 
 
 %D
-%ASE reproducibility
-%from pQTLplotsForManuscript.m
-plot_ase_reproducibility(4,dependency_directory,output_directory)
+%heritability cross-plot
+subplot(2,4,6)
+plot_heritability_parents(dependency_directory,output_directory)
 
 
 
