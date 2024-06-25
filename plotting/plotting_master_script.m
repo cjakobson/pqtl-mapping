@@ -221,21 +221,15 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %allele effect and 1K replication
 %Odc2
 subplot(2,8,1)
-plot_locus_effect('YOR222W','Odc2',10727,4e4,dependency_directory,output_directory)
-
-subplot(2,8,2)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YOR222W','Odc2',10727,3e2,dependency_directory,output_directory)
+plot_locus_effect_1K('YOR222W','Odc2',10727,3,dependency_directory,output_directory)
 
 
 %C
 %Rdl1
-subplot(2,8,3)
-plot_locus_effect('YOR285W','Rdl1',10838,6e4,dependency_directory,output_directory)
-
-subplot(2,8,4)
+subplot(2,8,2)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YOR285W','Rdl1',10838,1.5e3,dependency_directory,output_directory)
+plot_locus_effect_1K('YOR285W','Rdl1',10838,3,dependency_directory,output_directory)
 
 
 
@@ -244,9 +238,18 @@ plot_locus_effect_1K('YOR285W','Rdl1',10838,1.5e3,dependency_directory,output_di
 %MS validation
 %from plotValidation.m
 
+%mapping predictions
+subplot(2,8,3)
+plot_locus_effect('YHR042W','Ncp1',5049,4e4,dependency_directory,output_directory)
+
 %Ncp1
-subplot(2,8,5)
+subplot(2,8,4)
 plot_validation_cis('NCP1','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+
+
+
+subplot(2,8,5)
+plot_locus_effect('YGR208W','Ser2',4692,2e4,dependency_directory,output_directory)
 
 %Ser2
 subplot(2,8,6)
@@ -354,9 +357,11 @@ print([output_directory 'figure_S2_1'],'-dsvg','-r0')
 print([output_directory 'figure_S2_1'],'-djpeg','-r300')
 
 
+
+
 close all
 
-
+nsaed
 
 %Figure 3
 
