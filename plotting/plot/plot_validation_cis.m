@@ -52,6 +52,7 @@ function []=plot_validation_cis(gene_name,mutant_to_plot,dependency_directory,ou
     end
     bar(v_mean)
     for j=1:length(to_plot)
+        %length(to_plot{j})
         scatter(j*ones(length(to_plot{j}),1),to_plot{j},25,'k','filled')
     end
     xticks(1:3)
