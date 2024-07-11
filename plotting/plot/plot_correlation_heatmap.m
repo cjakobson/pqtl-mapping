@@ -1,4 +1,5 @@
-function []=plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
+function []=plot_correlation_heatmap(gene_list,lower_bound,upper_bound,...
+    dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -38,7 +39,7 @@ function []=plot_correlation_heatmap(gene_list,dependency_directory,output_direc
     end
     
     
-    imagesc(corr_mat,[-0.75 0.75])
+    imagesc(corr_mat,[lower_bound upper_bound])
     axis square
     colormap gray
     colorbar

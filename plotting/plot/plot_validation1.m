@@ -1,4 +1,4 @@
-function [] = plot_validation_erg11(dependency_directory,output_directory)
+function [] = plot_validation1(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -9,26 +9,21 @@ function [] = plot_validation_erg11(dependency_directory,output_directory)
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
 
-    input_data=readtable([dependency_directory 'validation1_remeasured_metadata-joined_to-chris_v1.csv']);
+    %input_data=readtable([dependency_directory 'validation1_remeasured_metadata-joined_to-chris_v1.csv']);
+    input_data=readtable([dependency_directory '20240607_proteomics-data_validation_set1.xlsx']);
     
-    protein_names=unique(input_data.GENENAME);
+    protein_names=unique(input_data.COMMON);
     protein_names(cellfun(@isempty,protein_names))=[];
 
-    input_data(ismember(input_data.condition,'flc'),:)=[];
-
-
     genes_to_plot={'ERG11'};
-    strains_to_plot={'YJM975',...
-        'YJM975_ERG11_122014T-C',...
-        'YJM975_Erg11_433Asn-Lys',...
-        'YJM975_ERG11_122014T-C-Erg11_433Asn-Lys'};
+    strains_to_plot={'YDJ6635','YDJ8281','YDJ8436','YDJ8437'};
 
     protein_idx=logical(ismember(input_data.COMMON,genes_to_plot{1}));
     
     clear to_plot
     %also all together for YJM975
     for i=1:length(strains_to_plot)
-        strain_idx_1=ismember(input_data.strain_detail,strains_to_plot{i});
+        strain_idx_1=ismember(input_data.strain_id,strains_to_plot{i});
         temp_idx=logical(protein_idx.*strain_idx_1);
         %sum(temp_idx)
         to_plot{i}=input_data.abundance(temp_idx);

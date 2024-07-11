@@ -97,7 +97,8 @@ plot_locus_effect('YKL150W','Mcr1',6952,1e5,dependency_directory,output_director
 %I
 %Mcr1 cis validation
 subplot(2,8,14)
-plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
+plot_validation2('MCR1','YDJ8524',dependency_directory,output_directory)
+%plot_validation_cis('MCR1','YDJ8524 RM11 MCR1 G>A',dependency_directory,output_directory)
 
 
 
@@ -247,7 +248,7 @@ plot_locus_effect('YHR042W','Ncp1',5049,4e4,dependency_directory,output_director
 
 %Ncp1
 subplot(2,8,4)
-plot_validation_cis('NCP1','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+plot_validation2('NCP1','YDJ8525',dependency_directory,output_directory)
 
 
 
@@ -256,7 +257,7 @@ plot_locus_effect('YGR208W','Ser2',4692,2e4,dependency_directory,output_director
 
 %Ser2
 subplot(2,8,6)
-plot_validation_cis('SER2','YDJ8526 RM11 SER2 G>A',dependency_directory,output_directory)
+plot_validation2('SER2','YDJ8526',dependency_directory,output_directory)
 
 
 
@@ -333,14 +334,12 @@ plot_beta_ase(dependency_directory,output_directory)
 %synonymous reconstructions
 %GCS1
 subplot(2,8,5)
-plot_validation_ira2('YDL226C','YDJ8528',...
-    dependency_directory,output_directory)
+plot_validation3('GCS1','YDJ8528',dependency_directory,output_directory)
 
 
 %AAT2
 subplot(2,8,6)
-plot_validation_ira2('YLR027C','YDJ8527',...
-    dependency_directory,output_directory)
+plot_validation3('AAT2','YDJ8527',dependency_directory,output_directory)
 
 
 %D
@@ -500,8 +499,7 @@ plot_locus_effect('YKL150W','Mcr1',10191,1e5,...
 %IRA2/Mcr1 reconstruction
 %from plotValidation3.m
 subplot(2,8,4)
-plot_validation_ira2('YKL150W','YDJ8578',...
-    dependency_directory,output_directory)
+plot_validation3('MCR1','YDJ8578',dependency_directory,output_directory)
 
 
 
@@ -599,7 +597,7 @@ for i=1:height(genes_to_plot)
 end
 
 subplot(2,4,1)
-plot_correlation_heatmap(table2array(genes_to_plot),...
+plot_correlation_heatmap(table2array(genes_to_plot),-0.75,0.75,...
     dependency_directory,output_directory)
 
 
@@ -683,7 +681,7 @@ plot_abundance_correlation(gene_name1,gene_name2,...
 %B
 %mean of parents
 subplot(2,4,3)
-plot_correlation_heatmap_parents(table2array(genes_to_plot),...
+plot_correlation_heatmap_parents(table2array(genes_to_plot),-0.75,0.75,...
     dependency_directory,output_directory)
 
 
@@ -719,7 +717,7 @@ figure('units','normalized','outerposition',[0 0 1 1])
 gene_list={'YBL099W','YJR121W','YBR039W','YPL078C','YKL016C',...
     'YPL271W','YDR377W','YML081C-A','YOL077W-A','YPR020W'};
 subplot(2,4,1)
-plot_correlation_heatmap(gene_list,dependency_directory,output_directory)
+plot_correlation_heatmap(gene_list,0,0.75,dependency_directory,output_directory)
 
 
 %E
@@ -785,7 +783,7 @@ plot_qtl_effect(locus1,locus2,'48h fluconazole_100uM-rad',dependency_directory,o
 %ERG11 MS validation
 %from plotValidation1.m
 subplot(2,8,2)
-plot_validation_erg11(dependency_directory,output_directory)
+plot_validation1(dependency_directory,output_directory)
 
 
 %C
@@ -853,7 +851,7 @@ plot_pqtn_phenotyping('8525_RM11_NCP1','min glc',0.9,1.2,dependency_directory,ou
 %B
 %NCP1 validation effect on Erg11 levels
 subplot(2,8,2)
-plot_validation_cis('ERG11','YDJ8525 RM11 NCP1 A>T',dependency_directory,output_directory)
+plot_validation2('ERG11','YDJ8525',dependency_directory,output_directory)
 
 
 %C

@@ -10,59 +10,66 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
     grey=[128 128 128]./256;
     
     
-    pqtl_input=readtable([dependency_directory 'Segregants_validation3_annotated_v2.csv']);
+    validation_input=readtable([dependency_directory '20240607_proteomics-data_validation_set3.xlsx']);
     mapping_input=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
 
     %subset to pQTNs?
     %mapping_input=mapping_input(mapping_input.isQtn==1,:);
 
-    pqtl_input(ismember(pqtl_input.strain,'QC'),:)=[];
-
-    strain_names=unique(pqtl_input.background_mutation);
-    protein_names=unique(pqtl_input.ORF);
+    validation_input(ismember(validation_input.strain_id,'QC'),:)=[];
+    strain_names=unique(validation_input.strain_id);
+    
+    protein_names=unique(validation_input.COMMON);
     protein_names(cellfun(@isempty,protein_names))=[];
     protein_names(ismember(protein_names,'NA'))=[];
 
-    pqtl_input(ismember(pqtl_input.strain,'QC'),:)=[];
 
+    
+    
     %regress out OD
-    corrected_mat=nan(length(protein_names),length(strain_names));
-    for i=4:length(protein_names)
+    abundance_mat=nan(length(protein_names),length(strain_names));
+    for i=1:length(protein_names)
 
-        temp_table=pqtl_input(ismember(pqtl_input.ORF,protein_names{i}),:);
-        common_names{i}=temp_table.COMMON{1};
+        temp_table=validation_input(ismember(validation_input.COMMON,protein_names{i}),:);
 
         v_abundance=temp_table.abundance;
-        v_od=cellfun(@str2num,temp_table.OD600_adj);
-
-        temp_model=fitlm(v_od,v_abundance);
-        yI=table2array(temp_model.Coefficients(1,1));
-        m(i)=table2array(temp_model.Coefficients(2,1));
-        v_temp=v_abundance-m(i)*v_od;
 
         for j=1:length(strain_names)
 
-            v_temp_strain=v_temp(ismember(temp_table.background_mutation,strain_names{j}));
+            v_temp_strain=v_abundance(ismember(temp_table.strain_id,strain_names{j}));
 
-            corrected_mat(i,j)=mean(v_temp_strain,'omitnan');
+            abundance_mat(i,j)=mean(v_temp_strain,'omitnan');
 
         end
 
     end
 
-
     %plot IRA2 effects against each other and against mapping
-    rm_fc=corrected_mat(:,8)./corrected_mat(:,2);
-    yjm_fc=corrected_mat(:,7)./corrected_mat(:,1);
+    wt_idx=find(ismember(strain_names,'YDJ6649'));
+    mut_idx=find(ismember(strain_names,'YDJ8578'));
+    rm_fc=abundance_mat(:,mut_idx)./abundance_mat(:,wt_idx);
+    
+    wt_idx=find(ismember(strain_names,'YDJ6635'));
+    mut_idx=find(ismember(strain_names,'YDJ8529'));
+    yjm_fc=abundance_mat(:,mut_idx)./abundance_mat(:,wt_idx);
 
-
+    
     %mapping betas in same order for IRA2
     locus_idx=ismember(mapping_input.index,10191);
 
+    %match common names
+    mapping_common_name=cell(height(mapping_input),1);
+    for i=1:height(mapping_input)
+        
+        temp_str=strsplit(mapping_input.commonName{i},';');
+        mapping_common_name{i}=temp_str{1};
+        
+    end
+    
     mapping_beta=nan(length(protein_names),1);
     for i=1:length(protein_names)
 
-        protein_idx=ismember(mapping_input.protein,protein_names{i});
+        protein_idx=ismember(mapping_common_name,protein_names{i});
 
         temp_idx=logical(protein_idx.*locus_idx);
 
@@ -102,6 +109,11 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
     [h,p,stats]=fishertest(temp_table);
     text(0.8,0.2,num2str(p))       
 
+    %label strong hits
+    temp_idx=find(abs(mapping_beta)>0.4);
+    for i=1:length(temp_idx)
+        text(log2(v1(temp_idx(i))),v2(temp_idx(i)),protein_names{temp_idx(i)})
+    end
     
     
     
@@ -131,6 +143,12 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
         'VariableNames',{'mapping RM up','mapping RM down'},'RowNames',{'ms RM up','ms RM down'});
     [h,p,stats]=fishertest(temp_table);
     text(0.8,0.2,num2str(p))       
+
+    %label strong hits
+    temp_idx=find(abs(mapping_beta)>0.4);
+    for i=1:length(temp_idx)
+        text(log2(v1(temp_idx(i))),v2(temp_idx(i)),protein_names{temp_idx(i)})
+    end     
 
     
     
