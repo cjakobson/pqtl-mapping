@@ -817,19 +817,42 @@ plot_pqtn_phenotyping('8525_RM11_NCP1','fluconazole',0.9,1.2,dependency_director
 plot_pqtn_qtn_scores(4,'YOL081W',10191,dependency_directory,output_directory)
 
 
-%H
-%phenotyping on ethanol
-%from readSgaDataPQtnPhen.m
-subplot(2,8,13)
-plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
 
-subplot(2,8,14)
-plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
+%H
+%IRA2 reconstruction
+%from plotValidation3.m
+plot_ira2_validation(6,dependency_directory,output_directory)
 
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_6_1'],'-dsvg','-r0')
 print([output_directory 'figure_6_1'],'-djpeg','-r300')
+
+
+
+figure('units','normalized','outerposition',[0 0 1 1])
+
+
+%I
+%IRA2 crossplot
+subplot(2,4,1)
+plot_ira2_effect_crossplot(dependency_directory,output_directory)
+
+
+
+%J
+%phenotyping on ethanol
+%from readSgaDataPQtnPhen.m
+subplot(2,8,3)
+plot_pqtn_phenotyping('8578_RM11_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
+
+subplot(2,8,4)
+plot_pqtn_phenotyping('8529_YJM975_IRA2','min ethanol',0.6,1.1,dependency_directory,output_directory)
+
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'figure_6_2'],'-dsvg','-r0')
+print([output_directory 'figure_6_2'],'-djpeg','-r300')
 
 
 
@@ -870,18 +893,13 @@ plot_pqtl_5K('YOL081W',dependency_directory,output_directory)
 
 
 
+
 %E
-%IRA2 reconstruction
-%from plotValidation3.m
-plot_ira2_validation(5,dependency_directory,output_directory)
-
-
-%F
 %IRA2 phenotyping in glucose
-subplot(2,8,15)
+subplot(2,8,11)
 plot_pqtn_phenotyping('8578_RM11_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
-subplot(2,8,16)
+subplot(2,8,12)
 plot_pqtn_phenotyping('8529_YJM975_IRA2','min glc',0.6,1.1,dependency_directory,output_directory)
 
 

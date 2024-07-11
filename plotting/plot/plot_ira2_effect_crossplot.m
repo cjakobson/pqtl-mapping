@@ -1,4 +1,4 @@
-function [] = plot_ira2_validation(plot_offset,dependency_directory,output_directory)
+function [] = plot_ira2_effect_crossplot(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -53,7 +53,6 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
     mut_idx=find(ismember(strain_names,'YDJ8529'));
     yjm_fc=abundance_mat(:,mut_idx)./abundance_mat(:,wt_idx);
 
-    
     %mapping betas in same order for IRA2
     locus_idx=ismember(mapping_input.index,10191);
 
@@ -82,79 +81,27 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
     end
 
 
+    proteins_to_plot=~isnan(mapping_beta);
 
-
-    subplot(2,4,plot_offset+1)
-    v1=yjm_fc;
-    v2=mapping_beta;
+    v1=rm_fc(proteins_to_plot);
+    v2=yjm_fc(proteins_to_plot);
     hold on
-    scatter(log2(v1),v2,10,'k','filled')
+    scatter(log2(v1),log2(v2),10,'k','filled')
     axis square
     xlim([-1 1])
-    ylim([-0.6 0.6])
-    xlabel('log_2 YJM975 IRA2*/WT')
-    ylabel('mapping \beta')
+    ylim(xlim)
+    %ylim([-0.6 0.6])
+    ylabel('log_2 YJM IRA2*/WT')
+    xlabel('log_2 RM IRA2*/WT')
     plot(xlim,[0 0],':r')
     plot([0 0],ylim,':r')
 
-
-    %concordant/non-concordant
-    n1=sum((v1<1).*(v2>0));
-    n2=sum((v1>1).*(v2>0));
-    n3=sum((v1<1).*(v2<0));
-    n4=sum((v1>1).*(v2<0));
-    
-    %sum of concordant
-    n2+n3
-
-    temp_table=table([n1;n2],[n3;n4],...
-        'VariableNames',{'mapping RM up','mapping RM down'},'RowNames',{'ms YJM up','ms YJM down'});
-    [h,p,stats]=fishertest(temp_table);
-    text(0.8,0.2,num2str(p))       
-
-    %label strong hits
-    temp_idx=find(abs(mapping_beta)>0.4);
-    for i=1:length(temp_idx)
-        text(log2(v1(temp_idx(i))),v2(temp_idx(i)),protein_names{temp_idx(i)})
-    end
-    
-    
-    
-    v1=rm_fc;
-    v2=mapping_beta;
-    
-    subplot(2,4,plot_offset+2)
-    hold on
-    scatter(log2(v1),v2,10,'k','filled')
-    axis square
-    xlim([-1 1])
-    ylim([-0.6 0.6])
-    xlabel('log_2 RM11 IRA2*/WT')
-    ylabel('mapping \beta')
-    plot(xlim,[0 0],':r')
-    plot([0 0],ylim,':r')
-
-
-    %concordant/non-concordant
-    n1=sum((v1>1).*(v2>0));
-    n2=sum((v1<1).*(v2>0));
-    n3=sum((v1>1).*(v2<0));
-    n4=sum((v1<1).*(v2<0));
-    
-    %sum of concordant
-    n2+n3
-
-
-    temp_table=table([n1;n2],[n3;n4],...
-        'VariableNames',{'mapping RM up','mapping RM down'},'RowNames',{'ms RM up','ms RM down'});
-    [h,p,stats]=fishertest(temp_table);
-    text(0.8,0.2,num2str(p))       
-
-    %label strong hits
-    temp_idx=find(abs(mapping_beta)>0.4);
-    for i=1:length(temp_idx)
-        text(log2(v1(temp_idx(i))),v2(temp_idx(i)),protein_names{temp_idx(i)})
-    end     
+% 
+%     %label strong hits
+%     temp_idx=find(abs(mapping_beta)>0.4);
+%     for i=1:length(temp_idx)
+%         text(log2(v1(temp_idx(i))),v2(temp_idx(i)),protein_names{temp_idx(i)})
+%     end     
 
     
     
