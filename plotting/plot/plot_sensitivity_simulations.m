@@ -12,6 +12,10 @@ function []=plot_sensitivity_simulations(dependency_directory,output_directory)
     [f_discovered,v_bins,temp_labels]=...
         calculate_sensitivity_simulations(dependency_directory,output_directory);
     
+    1-f_discovered(v_bins==0.1)
+    
+    1-f_discovered(v_bins==0.025)
+    
     hold on
     plot(1-f_discovered)
     ylim([0 1])

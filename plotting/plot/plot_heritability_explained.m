@@ -34,12 +34,13 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     hold on
     %to_plot1=var_exp./h_squared_mean;
     to_plot{1}=var_exp;
-    to_plot{1}(to_plot{1}==0)=nan;
+    %to_plot{1}(to_plot{1}==0)=nan;
     histogram(to_plot{1},0:0.05:1,'Normalization','probability')
     histogram(to_plot{2},0:0.05:1,'Normalization','probability')
-    histogram(to_plot{3},0:0.05:1,'Normalization','probability')
+    %histogram(to_plot{3},0:0.05:1,'Normalization','probability')
     %easy_box(to_plot)
-    legend({'F6','biobank','Albert mRNA'})
+    %legend({'F6','Albert mRNA','biobank'})
+    legend({'F6','Albert mRNA'})
     %xticklabels({'F6','biobank','Albert mRNA'})
     %ylabel('frequency')
     %xlabel('fraction of H^2 explained')
@@ -47,6 +48,10 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     %ylabel('variance explained')
     xlim([0 1])
     axis square
+    
+    median(to_plot{1},'omitnan')
+    median(to_plot{2},'omitnan')
+    median(to_plot{3},'omitnan')
     
     
 end
