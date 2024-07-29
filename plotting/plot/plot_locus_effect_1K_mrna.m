@@ -1,4 +1,4 @@
-function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
+function []=plot_locus_effect_1K_mrna(gene_name,common_name,locus_number,y_lim,...
     dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
@@ -87,13 +87,12 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
         f6_for_box_plot{j}=v_temp(ismember(f6_idx,genotypes_for_box_plot{j}));
     end
 
-    %     to_plot{1}=v_temp(rm_idx);
+%     to_plot{1}=v_temp(rm_idx);
 %     to_plot{2}=v_temp(yjm_idx);
     
     to_plot{1}=f6_for_box_plot{1};
     to_plot{2}=f6_for_box_plot{2};
 
-    
     %normalize to RM median
     temp_median=median(to_plot{1},'omitnan');
     
@@ -101,23 +100,11 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
     to_plot{2}=to_plot{2}/temp_median;
     
     
-    cis_pqtn_data=calculate_1K_replication(dependency_directory,output_directory);
+    cis_pqtn_data=calculate_1K_replication_mrna(dependency_directory,output_directory);
     
     temp_idx=find(ismember(cis_pqtn_data.protein,gene_name));
-    to_plot{5}=cis_pqtn_data.rm_array{temp_idx};
-    to_plot{6}=cis_pqtn_data.yjm_array{temp_idx};
-    
-    temp_median=median(to_plot{5},'omitnan');
-    
-    to_plot{5}=to_plot{5}/temp_median;
-    to_plot{6}=to_plot{6}/temp_median;
-    
-    
-    cis_pqtn_data_mrna=calculate_1K_replication_mrna(dependency_directory,output_directory);
-    
-    temp_idx=find(ismember(cis_pqtn_data_mrna.protein,gene_name));
-    to_plot{3}=cis_pqtn_data_mrna.rm_array{temp_idx};
-    to_plot{4}=cis_pqtn_data_mrna.yjm_array{temp_idx};
+    to_plot{3}=cis_pqtn_data.rm_array{temp_idx};
+    to_plot{4}=cis_pqtn_data.yjm_array{temp_idx};
     
     temp_median=median(to_plot{3},'omitnan');
     
@@ -127,16 +114,15 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
     
     hold on
     easy_box(to_plot)
-    title(cis_pqtn_data.commonName{temp_idx})
-    xticks(1:length(to_plot))
+    title([cis_pqtn_data.commonName{temp_idx} ' mRNA'])
+    xticks(1:4)
     xtickangle(45)
-    xticklabels({'RM allele','YJM allele','1K mRNA RM','1K mRNA YJM',...
-        '1K protein RM','1K protein YJM'})
+    xticklabels({'RM allele','YJM allele','RM allele','YJM allele'})
     ylim([0 y_lim])
     v_temp=ylim;
     ylim([0 v_temp(2)])
     text(1,0.8*v_temp(2),['\beta = ' num2str(cis_pqtn_data.beta(temp_idx))])
-    for j=3:6
+    for j=3:4
         text(j,0.1*v_temp(2),num2str(length(to_plot{j})))
     end
     

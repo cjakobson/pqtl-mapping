@@ -236,6 +236,15 @@ subplot(2,8,2)
 plot_locus_effect_1K('YOR285W','Rdl1',10838,3,dependency_directory,output_directory)
 
 
+subplot(2,8,3)
+%from pQTLs1kGenomes.m
+plot_locus_effect_1K('YOR317W','Faa1',10892,3,dependency_directory,output_directory)
+
+subplot(2,8,4)
+%from pQTLs1kGenomes.m
+plot_locus_effect_1K('YLR244C','Map1',8024,2,dependency_directory,output_directory)
+
+
 
 
 %D
@@ -243,20 +252,20 @@ plot_locus_effect_1K('YOR285W','Rdl1',10838,3,dependency_directory,output_direct
 %from plotValidation.m
 
 %mapping predictions
-subplot(2,8,3)
+subplot(2,8,9)
 plot_locus_effect('YHR042W','Ncp1',5049,4e4,dependency_directory,output_directory)
 
 %Ncp1
-subplot(2,8,4)
+subplot(2,8,10)
 plot_validation2('NCP1','YDJ8525',dependency_directory,output_directory)
 
 
 
-subplot(2,8,5)
+subplot(2,8,11)
 plot_locus_effect('YGR208W','Ser2',4692,2e4,dependency_directory,output_directory)
 
 %Ser2
-subplot(2,8,6)
+subplot(2,8,12)
 plot_validation2('SER2','YDJ8526',dependency_directory,output_directory)
 
 
