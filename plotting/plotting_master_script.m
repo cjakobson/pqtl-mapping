@@ -933,8 +933,10 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %A
 %growth QTL rarefaction
 %from pQTLvsQTL.m
+trait_order=[8 9 10 1 5 7 2 3 6 12 11 4];
+
 subplot(2,4,1)
-plot_qtl_rarefaction(dependency_directory,output_directory)
+plot_qtl_rarefaction(trait_order,dependency_directory,output_directory)
 
 %B
 %effect size of pQTLs vs QTLs
@@ -972,7 +974,7 @@ plot_qtl_miami('rapamycin_5uM','tebuconazole_0.6uM',dependency_directory,output_
 %heatmap of QTN overlap
 %from pQTLvsQTL.m
 subplot(2,4,7)
-plot_overlap_heatmap(dependency_directory,output_directory)
+plot_overlap_heatmap(trait_order,dependency_directory,output_directory)
 
 
 

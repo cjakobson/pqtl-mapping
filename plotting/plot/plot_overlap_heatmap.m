@@ -1,4 +1,4 @@
-function [] = plot_overlap_heatmap(dependency_directory,output_directory)
+function [] = plot_overlap_heatmap(trait_order,dependency_directory,output_directory)
 
 
     set(0,'DefaultLineLineWidth',1)
@@ -21,7 +21,7 @@ function [] = plot_overlap_heatmap(dependency_directory,output_directory)
     pqtl_input(pqtl_input.bPos==1,:)=[];
 
     qtl_conditions=unique(qtl_input.condition);
-
+    qtl_conditions=qtl_conditions(trait_order);
     
     
     %overlap matrix -- how to calculate? within N markers?

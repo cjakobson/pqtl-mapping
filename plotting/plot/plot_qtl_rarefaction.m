@@ -1,4 +1,4 @@
-function [] = plot_qtl_rarefaction(dependency_directory,output_directory)
+function [] = plot_qtl_rarefaction(trait_order,dependency_directory,output_directory)
 
 
     set(0,'DefaultLineLineWidth',1)
@@ -15,7 +15,7 @@ function [] = plot_qtl_rarefaction(dependency_directory,output_directory)
 
     
     qtl_conditions=unique(pqtl_input.condition);
-    
+    qtl_conditions=qtl_conditions(trait_order);
     
     time_idx=ismember(pqtl_input.time,'96h');
 
