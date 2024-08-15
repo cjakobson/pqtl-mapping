@@ -28,10 +28,14 @@ function [] = plot_overlap_heatmap(trait_order,dependency_directory,output_direc
     dist_thresh=5;
 
     overlap_mat=nan(length(qtl_conditions));
+    overlap_count=nan(length(qtl_conditions));
+    condition_count=nan(length(qtl_conditions),1);
     for i=1:length(qtl_conditions)
 
         temp_idx1=unique(qtl_input.index(ismember(qtl_input.condition,qtl_conditions{i})));
 
+        condition_count(i)=length(temp_idx1);
+        
         for j=1:length(qtl_conditions)
 
             temp_idx2=unique(qtl_input.index(ismember(qtl_input.condition,qtl_conditions{j})));
@@ -43,6 +47,7 @@ function [] = plot_overlap_heatmap(trait_order,dependency_directory,output_direc
 
             end
 
+            overlap_count(i,j)=sum(v_has_overlap);
             overlap_mat(i,j)=sum(v_has_overlap)/length(v_has_overlap);
 
         end
@@ -63,11 +68,20 @@ function [] = plot_overlap_heatmap(trait_order,dependency_directory,output_direc
 
         end
 
+        overlap_count(i,length(qtl_conditions)+1)=sum(v_has_overlap);
         overlap_mat(i,length(qtl_conditions)+1)=sum(v_has_overlap)/length(v_has_overlap);
 
     end
 
-
+    condition_count(10)
+    condition_count(11)
+    
+    overlap_count(10,11)
+    overlap_count(10,13)
+    overlap_count(11,13)
+    
+    mean(mean(overlap_mat(:,1:12)))
+    mean(overlap_mat(:,13))
 
     imagesc(overlap_mat,[0 1])
 
