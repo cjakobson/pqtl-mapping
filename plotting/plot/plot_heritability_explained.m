@@ -16,9 +16,9 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     
     %also compare to recent BioBank paper
     %https://www.nature.com/articles/s41586-023-06592-6
-    biobank_data=readtable([dependency_directory '41586_2023_6592_MOESM3_ESM.xlsx'],'Sheet','ST19');
+    %biobank_data=readtable([dependency_directory '41586_2023_6592_MOESM3_ESM.xlsx'],'Sheet','ST19');
 
-    to_plot{3}=biobank_data.TotalHeritability_TH_;
+    %to_plot{3}=biobank_data.TotalHeritability_TH_;
     
     %and compare to Albert mRNA
     mrna_data=readtable([dependency_directory 'elife-35471-data4-v2.xlsx']);
@@ -34,7 +34,7 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     hold on
     %to_plot1=var_exp./h_squared_mean;
     to_plot{1}=var_exp;
-    %to_plot{1}(to_plot{1}==0)=nan;
+    to_plot{1}(to_plot{1}==0)=[];
     histogram(to_plot{1},0:0.05:1,'Normalization','probability')
     histogram(to_plot{2},0:0.05:1,'Normalization','probability')
     %histogram(to_plot{3},0:0.05:1,'Normalization','probability')
@@ -49,10 +49,30 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     xlim([0 1])
     axis square
     
+    to_plot{3}=var_exp./h_squared_mean;
+    to_plot{3}(to_plot{3}==0)=[];
+    
     median(to_plot{1},'omitnan')
     median(to_plot{2},'omitnan')
     median(to_plot{3},'omitnan')
     
+    
+    %also calculate median confidence intervals for mRNA and X-pQTL
+    x_pqtl_data=readtable([dependency_directory '41586_2014_BFnature12904_MOESM50_ESM.xlsx']);
+    
+    for i=1:height(mrna_data)
+        
+        temp_left=strsplit(mrna_data.CI_l{i},{':','_'});
+        temp_right=strsplit(mrna_data.CI_r{i},{':','_'});
+        
+        conf_mrna(i)=abs(str2num(temp_left{2})-str2num(temp_right{2}));
+        
+    end
+    
+    conf_x_pqtl=abs(x_pqtl_data.x2LODIntervalLeft-x_pqtl_data.x2LODIntervalRight);
+    
+    median(conf_mrna)
+    median(conf_x_pqtl)
     
 end
 
