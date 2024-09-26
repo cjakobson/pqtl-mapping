@@ -13,8 +13,8 @@ blue=[43 172 226]./256;
 orange=[248 149 33]./256;
 grey=[128 128 128]./256;
 
-filebase='/Users/cjakobson/';
-%filebase='/Users/christopherjakobson/';
+%filebase='/Users/cjakobson/';
+filebase='/Users/christopherjakobson/';
 
 code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
 dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
@@ -226,23 +226,24 @@ figure('units','normalized','outerposition',[0 0 1 1])
 %Odc2
 subplot(2,8,1)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YOR222W','Odc2',10727,3,dependency_directory,output_directory)
+plot_locus_effect_1K('YOR222W','Odc2',10727,0.75,1.75,dependency_directory,output_directory)
 
 
-%C
 %Rdl1
 subplot(2,8,2)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YOR285W','Rdl1',10838,3,dependency_directory,output_directory)
+plot_locus_effect_1K('YOR285W','Rdl1',10838,0.4,1.2,dependency_directory,output_directory)
 
 
 subplot(2,8,3)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YOR317W','Faa1',10892,3,dependency_directory,output_directory)
+plot_locus_effect_1K('YOR317W','Faa1',10892,0.8,1.3,dependency_directory,output_directory)
+
 
 subplot(2,8,4)
 %from pQTLs1kGenomes.m
-plot_locus_effect_1K('YLR244C','Map1',8024,2,dependency_directory,output_directory)
+plot_locus_effect_1K('YLR244C','Map1',8024,0.7,1.2,dependency_directory,output_directory)
+
 
 
 

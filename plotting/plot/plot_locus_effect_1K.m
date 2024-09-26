@@ -1,4 +1,4 @@
-function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
+function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim1,y_lim2,...
     dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
@@ -126,20 +126,45 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim,...
     
     
     hold on
-    easy_box(to_plot)
+    %change to bars with sd
+    for i=1:length(to_plot)
+
+        v_mean(i)=mean(to_plot{i},'omitnan');
+        v_sd(i)=std(to_plot{i},'omitnan')./sqrt(length(to_plot{i}));
+
+    end
+
+    bar(v_mean)
+    errorbar(v_mean,v_sd,'.k')
     title(cis_pqtn_data.commonName{temp_idx})
+    xticks(0.5:(length(to_plot)+0.5))
     xticks(1:length(to_plot))
     xtickangle(45)
     xticklabels({'RM allele','YJM allele','1K mRNA RM','1K mRNA YJM',...
         '1K protein RM','1K protein YJM'})
-    ylim([0 y_lim])
-    v_temp=ylim;
-    ylim([0 v_temp(2)])
+    % ylim([0 y_lim])
+    % v_temp=ylim;
+    % ylim([0 v_temp(2)])
+    ylim([y_lim1 y_lim2])
     text(1,0.8*v_temp(2),['\beta = ' num2str(cis_pqtn_data.beta(temp_idx))])
     for j=3:6
         text(j,0.1*v_temp(2),num2str(length(to_plot{j})))
     end
-    
+
+    % easy_box(to_plot)
+    % title(cis_pqtn_data.commonName{temp_idx})
+    % xticks(1:length(to_plot))
+    % xtickangle(45)
+    % xticklabels({'RM allele','YJM allele','1K mRNA RM','1K mRNA YJM',...
+    %     '1K protein RM','1K protein YJM'})
+    % ylim([0 y_lim])
+    % v_temp=ylim;
+    % ylim([0 v_temp(2)])
+    % text(1,0.8*v_temp(2),['\beta = ' num2str(cis_pqtn_data.beta(temp_idx))])
+    % for j=3:6
+    %     text(j,0.1*v_temp(2),num2str(length(to_plot{j})))
+    % end
+    % 
     
 end
 
