@@ -9,8 +9,29 @@ function []=plot_zoom_volcano(dependency_directory,output_directory)
     orange=[248 149 33]./256;
     grey=[128 128 128]./256;
     
+    %to get protein names
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,orf_names,strain_index]=...
+        parse_raw_abundance(dependency_directory,output_directory);
+
     [fold_change,p_val]=calculate_parental_mean_fc(dependency_directory,output_directory);
     
+    pqtl_input=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
+    %don't count OD600
+    pqtl_input=pqtl_input(pqtl_input.index>0,:);
+
+    for i=1:length(orf_names)
+        
+        n_pqtls(i)=sum(ismember(pqtl_input.protein,orf_names{i}));
+
+    end
+
+    sum(n_pqtls>0)
+
+    sum(p_val>0.05)
+
+    sum((n_pqtls>0).*(p_val'>0.05))
+
+    mean(n_pqtls(p_val'>0.05))
     
     hold on
     scatter(log2(fold_change),-log10(p_val),5,'k','filled')
