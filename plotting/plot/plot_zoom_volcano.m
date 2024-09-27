@@ -33,8 +33,11 @@ function []=plot_zoom_volcano(dependency_directory,output_directory)
 
     mean(n_pqtls(p_val'>0.05))
     
-    hold on
-    scatter(log2(fold_change),-log10(p_val),5,'k','filled')
+    has_pqtl_idx=n_pqtls>0;
+    
+    hold on   
+    scatter(log2(fold_change(has_pqtl_idx)),-log10(p_val(has_pqtl_idx)),25,'k','filled')
+    scatter(log2(fold_change(~has_pqtl_idx)),-log10(p_val(~has_pqtl_idx)),25,'or')
 
     ylim([0 -log10(0.05)])
     xlim([-0.4 0.4])

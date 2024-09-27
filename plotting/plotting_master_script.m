@@ -13,8 +13,8 @@ blue=[43 172 226]./256;
 orange=[248 149 33]./256;
 grey=[128 128 128]./256;
 
-%filebase='/Users/cjakobson/';
-filebase='/Users/christopherjakobson/';
+filebase='/Users/cjakobson/';
+%filebase='/Users/christopherjakobson/';
 
 code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
 dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
@@ -192,6 +192,8 @@ plot_sensitivity_simulations(dependency_directory,output_directory)
 %JH did plot for figures
 subplot(2,4,7)
 plot_zoom_volcano(dependency_directory,output_directory)
+
+
 
 
 %K
