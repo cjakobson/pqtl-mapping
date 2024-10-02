@@ -11,6 +11,9 @@ function []=plot_main_volcano(dependency_directory,output_directory)
     
     [fold_change,p_val]=calculate_parental_mean_fc(dependency_directory,output_directory);
     
+    %also need gene names
+    [input_mat,strain_names,ydj_names,strain_merge_idx,rm_idx,yjm_idx,f6_idx,sgrp_idx,orf_names,strain_index]=...
+        parse_raw_abundance(dependency_directory,output_directory);
     
     hold on
     scatter(log2(fold_change),-log10(p_val),5,'k','filled')
@@ -29,6 +32,14 @@ function []=plot_main_volcano(dependency_directory,output_directory)
     ylabel('-log_{10}q')
     xlabel('log_2FC')
     axis square
+    
+    %output gene lists
+    to_output=table(orf_names(logical(plot_idx.*rm_idx)),'VariableNames',{'ORF'});
+    writetable(to_output,[dependency_directory 'RM_up_proteins.txt'])
+    
+    to_output=table(orf_names(logical(plot_idx.*yjm_idx)),'VariableNames',{'ORF'});
+    writetable(to_output,[dependency_directory 'YJM_up_proteins.txt'])
+    
 
 end
 
