@@ -5,7 +5,7 @@ function [pqtn_sorted, qtn_sorted] = ...
     pqtl_input=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
 
     pqtl_idx_to_use=pqtl_input.protein(logical(ismember(pqtl_input.gene1,gene_name)+...
-        ismember(pqtl_input.gene2,'IRA2')));
+        ismember(pqtl_input.gene2,gene_name)));
 
     pqtl_loci_to_use=(locus_to_use-10):(locus_to_use+10);
     pqtl_loci_to_use=pqtl_loci_to_use+1;  %OD600 variable offset
