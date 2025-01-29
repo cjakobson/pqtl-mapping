@@ -1,4 +1,4 @@
-function [] = plot_pqtn_qtn_scores(plot_offset,gene_name,locus_to_use,dependency_directory,output_directory)
+ function [] = plot_pqtn_qtn_scores(plot_offset,gene_name,locus_to_use,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
