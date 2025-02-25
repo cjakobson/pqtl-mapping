@@ -13,121 +13,91 @@ function [bar_mat] = calculate_biogrid_overlaps(dependency_directory,output_dire
     pqtl_to_use=pqtn_data(logical(trans_idx.*~od_idx),:);
 
     
+    %use pre-calculated biogrid matrices
+    load([dependency_directory 'biogrid_data.mat'])  
     
-    
-    
-    
-    %biogrid
-    biogrid_input=readtable([dependency_directory 'BIOGRID-ORGANISM-Saccharomyces_cerevisiae_S288c-4.4.207.tab3.txt']);
-
-
-    genesA=biogrid_input.SystematicNameInteractorA;
-    genesB=biogrid_input.SystematicNameInteractorB;
-    v_type=biogrid_input.ExperimentalSystemType;
-
-
-    query1=pqtl_to_use.protein;
-
-    query2=pqtl_to_use.gene1;
-    query3=pqtl_to_use.gene2;
-
     is_biogrid=zeros(height(pqtl_to_use),1);
 
     for i=1:length(is_biogrid)
 
-        v1=ismember(genesA,query1{i});
-        v2=ismember(genesB,query1{i});
+        target_idx=find(ismember(all_genes,pqtl_to_use.protein{i}));
 
-        if sum(v1)>0
+        gene_idx=find(ismember(all_genes,{pqtl_to_use.gene1{i},pqtl_to_use.gene2{i}}));
 
-            sum1=sum(ismember(genesB(v1),query2{i}));
-            sum3=sum(ismember(genesB(v1),query3{i}));
+        if ~isempty(target_idx)&&~isempty(gene_idx)
 
-        else
-
-            sum1=0;
-            sum3=0;
-
-        end
-
-        if sum(v2)>0
-
-            sum2=sum(ismember(genesB(v2),query2{i}));
-            sum4=sum(ismember(genesB(v2),query3{i}));
-
-        else
-
-            sum2=0;
-            sum4=0;
-
-        end
-
-        if (sum1+sum2+sum3+sum4)>0
-
-            is_biogrid(i)=1;
+            is_biogrid(i)=logical(sum(interaction_mat(target_idx,gene_idx)));
 
         end
 
     end
 
 
-    %look up interaction types for hits
-    to_lookup=find(is_biogrid);
+    load([dependency_directory 'biogrid_data_genetic.mat'])  
+    
+    is_genetic=zeros(height(pqtl_to_use),1);
 
-    for i=1:length(to_lookup)
+    for i=1:length(is_genetic)
 
-        query1=pqtl_to_use.protein{to_lookup(i)};
+        target_idx=find(ismember(all_genes,pqtl_to_use.protein{i}));
 
-        v1=ismember(genesA,query1);
-        v2=ismember(genesB,query1);
+        gene_idx=find(ismember(all_genes,{pqtl_to_use.gene1{i},pqtl_to_use.gene2{i}}));
 
-        query2=pqtl_to_use.gene1{to_lookup(i)};
-        query3=pqtl_to_use.gene2{to_lookup(i)};
+        if ~isempty(target_idx)&&~isempty(gene_idx)
 
-        v3=ismember(genesB,query2);
-        v4=ismember(genesA,query2);
-
-        v5=ismember(genesB,query3);
-        v6=ismember(genesA,query3);
-
-        temp_idx=find((v1.*v3)+(v2.*v4)+(v1.*v5)+(v2.*v6));
-
-        interaction_types{i}=unique(v_type(temp_idx));
-
-    end
-
-
-    for i=1:length(interaction_types)
-
-        if length(interaction_types{i})==1
-
-            is_genetic(i)=strcmp(interaction_types{i},'genetic');
-            is_physical(i)=strcmp(interaction_types{i},'physical');
-
-        elseif length(interaction_types{i})==2
-
-            is_both(i)=1;
+            is_genetic(i)=logical(sum(interaction_mat_genetic(target_idx,gene_idx)));
 
         end
 
     end
 
+    load([dependency_directory 'biogrid_data_physical.mat'])  
+    
+    is_physical=zeros(height(pqtl_to_use),1);
+
+    for i=1:length(is_genetic)
+
+        target_idx=find(ismember(all_genes,pqtl_to_use.protein{i}));
+
+        gene_idx=find(ismember(all_genes,{pqtl_to_use.gene1{i},pqtl_to_use.gene2{i}}));
+
+        if ~isempty(target_idx)&&~isempty(gene_idx)
+
+            is_physical(i)=logical(sum(interaction_mat_physical(target_idx,gene_idx)));
+
+        end
+
+    end
+
+    is_both=logical(is_physical.*is_genetic);
+
+    %don't double count
+    is_physical(is_both)=0;
+    is_genetic(is_both)=0;
+
+
+    sum(is_biogrid)
+    sum(is_genetic)/sum(is_biogrid)
+    sum(is_physical)/sum(is_biogrid)
+    sum(is_both)/sum(is_biogrid)
 
 
     clear bar_mat
     %biogrid; then split by biogrid type
     %bar_mat(1,1)=sum(is_complex)/length(is_complex);
-    bar_mat(1,1)=sum(is_biogrid)/length(is_biogrid);
+    bar_mat(1,1)=sum(is_biogrid)/length(is_biogrid)
     bar_mat(1,2)=1-bar_mat(1,1);
     bar_mat(1,3)=0;
 
-    bar_mat(3,1)=sum(is_genetic)/length(is_genetic);
-    bar_mat(3,2)=sum(is_physical)/length(is_genetic);
-    bar_mat(3,3)=sum(is_both)/length(is_genetic);
+    bar_mat(3,1)=sum(is_genetic)/sum(is_biogrid);
+    bar_mat(3,2)=sum(is_physical)/sum(is_biogrid);
+    bar_mat(3,3)=sum(is_both)/sum(is_biogrid);
     bar_mat(3,4)=1-bar_mat(3,3)-bar_mat(3,2)-bar_mat(3,1);
 
 
-    
+    sum(sum(triu(interaction_mat,1)))
+    sum(sum(triu(interaction_mat_physical,1)))/sum(sum(triu(interaction_mat,1)))
+    sum(sum(triu(interaction_mat_genetic,1)))/sum(sum(triu(interaction_mat,1)))
 
 
 

@@ -1,5 +1,5 @@
 %rarefaction plots by descending abundance
-function []=plot_rarefaction(dependency_directory,output_directory)
+function []=plot_marginal_rarefaction(dependency_directory,output_directory)
     
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')
@@ -87,20 +87,29 @@ function []=plot_rarefaction(dependency_directory,output_directory)
 
 
 
+    %plot marginal pQTLs
+    v1=movmean(v_to_plot(2:end)-v_to_plot(1:(end-1)),25);
+    v2=movmean(v_random(2:end)-v_random(1:(end-1)),25);
     
+    
+    %subplot(2,4,4)
     hold on
-    plot(1:length(v_to_plot),v_to_plot,'k')
+    plot(1:length(v1),v1,'k')
     %plot(1:length(v_to_plot2),v_to_plot2)
-    plot(1:length(v_to_plot3),v_to_plot3,'g')
-    plot(1:length(v_random),v_random,'-b')
-    plot(1:length(v_20),v_20,'--b')
-    plot(1:length(v_80),v_80,'--b')
+    plot(1:length(v2),v2,'b')
     axis square
+    xlim([0 length(v1)])
     xlabel('number of proteins measured')
-    ylabel('number of unique pQTLs')
-    title('by descending abunance')
-    xlim([0 length(v_to_plot)])
-    ylim([0 2500])
+    ylabel('number of marginal pQTLs')
+    title('rarefaction')
+    ylim([0 10])
+    
+    temp_split=floor(length(v2)/5);
+    mean1=mean(v2(1:temp_split));
+    mean2=mean(v2((end-temp_split):end));
+    text(500,4,['1st vs 5th quintile yields ' num2str(mean1/mean2) '-fold'])
+
+
     
 end
 

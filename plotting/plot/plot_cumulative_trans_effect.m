@@ -31,7 +31,7 @@ function []= plot_cumulative_trans_effect(dependency_directory,output_directory)
     end
     tempLabels={'sum of cis','sum of trans'};
     
-    subplot(2,6,8)
+    %subplot(2,6,8)
     dot_and_line_plot(to_plot)
     ylim([0 0.15])
     xticks(1:length(to_plot))
