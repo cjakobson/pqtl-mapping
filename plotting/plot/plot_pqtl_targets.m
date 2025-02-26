@@ -49,7 +49,7 @@ function [] = plot_pqtl_targets(dependency_directory,output_directory)
     sum(is_growth(sort_idx((n_to_use+1):end)))/(length(is_growth)-n_to_use)
     
     
-    %try wrt number of targets?
+    %wrt number of targets
     clear v1 v2
     for j=1:length(p_thresh)
     

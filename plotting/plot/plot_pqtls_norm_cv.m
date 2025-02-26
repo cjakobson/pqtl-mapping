@@ -1,5 +1,5 @@
-%plot heritability against mean abundance
-function []=plot_pqtls_foldchange(dependency_directory,output_directory)
+
+function []=plot_pqtls_norm_cv(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')

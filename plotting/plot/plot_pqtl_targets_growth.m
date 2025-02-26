@@ -12,7 +12,7 @@ function [] = plot_pqtl_targets_growth(dependency_directory,output_directory)
     
     
 
-    %how often are hotspots QTLs? are they enriched?
+    %how often are hotspots QTNs? are they enriched?
     
     all_pqtl_data=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
     all_pqtl_data(all_pqtl_data.index==0,:)=[];   %geometric
@@ -44,7 +44,7 @@ function [] = plot_pqtl_targets_growth(dependency_directory,output_directory)
     end
     
     
-    %include random gene sets as a control?
+    %include all genes w SNPs as a control
     variant_info=readtable([dependency_directory 'variantInfoStructure.csv']);
     
     all_genes=unique([variant_info.gene1; variant_info.gene2]);

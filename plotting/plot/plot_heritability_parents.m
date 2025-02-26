@@ -1,5 +1,5 @@
-%plot heritability against mean abundance
-function []=plot_heritability_abundance(dependency_directory,output_directory)
+%plot heritability between parents
+function []=plot_heritability_parents(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')

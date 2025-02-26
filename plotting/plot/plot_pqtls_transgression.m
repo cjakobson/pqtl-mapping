@@ -1,4 +1,4 @@
-%plot heritability against mean abundance
+
 function []=plot_pqtls_transgression(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)

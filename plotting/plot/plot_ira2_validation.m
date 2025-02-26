@@ -13,8 +13,6 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
     validation_input=readtable([dependency_directory '20240607_proteomics-data_validation_set3.xlsx']);
     mapping_input=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
 
-    %subset to pQTNs?
-    %mapping_input=mapping_input(mapping_input.isQtn==1,:);
 
     validation_input(ismember(validation_input.strain_id,'QC'),:)=[];
     strain_names=unique(validation_input.strain_id);
@@ -26,7 +24,6 @@ function [] = plot_ira2_validation(plot_offset,dependency_directory,output_direc
 
     
     
-    %regress out OD
     abundance_mat=nan(length(protein_names),length(strain_names));
     for i=1:length(protein_names)
 

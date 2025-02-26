@@ -1,4 +1,4 @@
-function []=plot_pqtn_blosum(dependency_directory,output_directory)
+function []=plot_pqtn_foldx(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')

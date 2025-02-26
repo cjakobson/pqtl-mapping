@@ -1,7 +1,7 @@
 function [pqtn_sorted, qtn_sorted] = ...
     calculate_pqtn_qtn_scores(gene_name,locus_to_use,dependency_directory,output_directory)
 
-    %plot IRA2 pQTN scores for all its targets
+    %plot pQTN scores for all its targets
     pqtl_input=readtable([dependency_directory 'linearPqtlOd_FDR_0.1.csv']);
 
     pqtl_idx_to_use=pqtl_input.protein(logical(ismember(pqtl_input.gene1,gene_name)+...

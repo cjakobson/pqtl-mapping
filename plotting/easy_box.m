@@ -1,4 +1,4 @@
-function []=easyBox(inputArray)
+function []=easy_box(inputArray)
 
 maxLength=max(cellfun(@length,inputArray));
 

@@ -3,18 +3,6 @@
 
 function [] = linear_mixed_model_pqtl_od_perm(protein_name,nPerms)
 
-%Pathname='/Users/cjakobson/Dropbox/JaroszLab/yeastCrossNutrientScreen/crosscrossdata/regression/modelSelection/incremental'
-
-% if Pathname(length(Pathname)) ~= '/'
-%     Pathname = [Pathname,'/'];
-% end
-
-%if ischar(traitIdx)
-%    traitIdx=str2num(traitIdx);
-%end
-
-%traitIdx
-
 %cd(Pathname);
 mkdir('linear-pqtl-perm');
 

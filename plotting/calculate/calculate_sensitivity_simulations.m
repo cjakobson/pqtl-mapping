@@ -1,9 +1,9 @@
 function [f_discovered,v_bins,temp_labels]=calculate_sensitivity_simulations(dependency_directory,output_directory)
 
     
-    load([dependency_directory 'simulations/' 'pQtlFilenameSim.mat'])
-    load([dependency_directory 'simulations/' 'pQtlTraitSim.mat'])
-    load([dependency_directory 'simulations/' 'pQtlBetaSim.mat'])
+    load([dependency_directory 'simulations/pQtlFilenameSim.mat'])
+    load([dependency_directory 'simulations/pQtlTraitSim.mat'])
+    load([dependency_directory 'simulations/pQtlBetaSim.mat'])
 
     
     ground_truth_beta=vBeta;

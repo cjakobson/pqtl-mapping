@@ -65,7 +65,7 @@ function []= plot_pqtl_stair(gene_name,pqtls,dependency_directory,output_directo
     hold on
     easy_box([f6_for_boxplot to_plot]);
     ylim([0 4.5])
-    title('Mcr1')
+    title(gene_name)
 
 
 

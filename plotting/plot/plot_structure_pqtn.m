@@ -1,4 +1,4 @@
-function []= plot_structure_all_possible(property_idx,dependency_directory,output_directory)
+function []= plot_structure_pqtn(property_idx,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
     set(0,'DefaultFigureColor','w')

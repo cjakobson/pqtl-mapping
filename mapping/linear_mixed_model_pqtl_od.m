@@ -1,17 +1,6 @@
 %simulate phenotype then perform regression
-%do N replicates and output performance
 
 function [] = linear_mixed_model_pqtl_od(protein_name,doFineMapping)
-
-%Pathname='/Users/cjakobson/Dropbox/JaroszLab/yeastCrossNutrientScreen/crosscrossdata/regression/modelSelection/incremental'
-
-% if Pathname(length(Pathname)) ~= '/'
-%     Pathname = [Pathname,'/'];
-% end
-
-%if ischar(traitIdx)
-%    traitIdx=str2num(traitIdx);
-%end
 
 
 %cd(Pathname);
@@ -127,11 +116,7 @@ end
 
 fracResolved=sum(vResolved)/length(vResolved);
 
-% for i=1:length(candidates)
-%     if length(candidates{i})==1
-%         posToMap(i)=posToMap(i)+candidates{i}(1)-11;
-%     end
-% end
+
 end
 
 

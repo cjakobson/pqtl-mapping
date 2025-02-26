@@ -17,7 +17,7 @@ function []=plot_pqtl_volcano(gene_name,dependency_directory,output_directory)
     pqtl_to_use=pqtl_input(logical(trans_idx.*~od_idx),:);
 
 
-    %quantify specifically for FRE1
+    %quantify specifically for query gene
     pqtl_idx=find(ismember(pqtl_to_use.gene1,gene_name)+...
         ismember(pqtl_to_use.gene2,gene_name));
 

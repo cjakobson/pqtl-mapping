@@ -35,7 +35,6 @@ function []=plot_heritability_abundance(dependency_directory,output_directory)
 
     hold on
     axis square
-    %size dots by CV
     scatter(mean(input_mat,2,'omitnan'),h_squared_mean,10,'k','filled')
     ylim([0.2 1])
     xlim([1e3 2e6])

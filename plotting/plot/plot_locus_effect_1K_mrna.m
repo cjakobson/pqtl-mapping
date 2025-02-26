@@ -12,8 +12,6 @@ function []=plot_locus_effect_1K_mrna(gene_name,common_name,locus_number,y_lim,.
     
     
     
-    %include mapping prediction in boxplot
-    
     
     %genotype data
     load([dependency_directory 'phasedGenotype.mat'])

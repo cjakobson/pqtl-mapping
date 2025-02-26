@@ -1,4 +1,4 @@
-function []=easyBox(inputArray)
+function []=easy_box_with_dots(inputArray)
 
 maxLength=max(cellfun(@length,inputArray));
 

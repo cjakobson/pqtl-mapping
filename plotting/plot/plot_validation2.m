@@ -1,4 +1,4 @@
-%plot beta vs ASE
+
 function []=plot_validation2(gene_name,mutant_to_plot,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)

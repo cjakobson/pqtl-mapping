@@ -11,10 +11,6 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim1,y_lim
     grey=[128 128 128]./256;
     
     
-    
-    %include mapping prediction in boxplot
-    
-    
     %genotype data
     load([dependency_directory 'phasedGenotype.mat'])
     
@@ -151,20 +147,6 @@ function []=plot_locus_effect_1K(gene_name,common_name,locus_number,y_lim1,y_lim
         text(j,0.1*v_temp(2),num2str(length(to_plot{j})))
     end
 
-    % easy_box(to_plot)
-    % title(cis_pqtn_data.commonName{temp_idx})
-    % xticks(1:length(to_plot))
-    % xtickangle(45)
-    % xticklabels({'RM allele','YJM allele','1K mRNA RM','1K mRNA YJM',...
-    %     '1K protein RM','1K protein YJM'})
-    % ylim([0 y_lim])
-    % v_temp=ylim;
-    % ylim([0 v_temp(2)])
-    % text(1,0.8*v_temp(2),['\beta = ' num2str(cis_pqtn_data.beta(temp_idx))])
-    % for j=3:6
-    %     text(j,0.1*v_temp(2),num2str(length(to_plot{j})))
-    % end
-    % 
     
 end
 

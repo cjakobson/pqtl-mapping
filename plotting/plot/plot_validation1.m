@@ -21,7 +21,7 @@ function [] = plot_validation1(dependency_directory,output_directory)
     protein_idx=logical(ismember(input_data.COMMON,genes_to_plot{1}));
     
     clear to_plot
-    %also all together for YJM975
+    %all together for YJM975
     for i=1:length(strains_to_plot)
         strain_idx_1=ismember(input_data.strain_id,strains_to_plot{i});
         temp_idx=logical(protein_idx.*strain_idx_1);

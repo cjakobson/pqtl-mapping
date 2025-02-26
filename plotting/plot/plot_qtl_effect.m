@@ -31,7 +31,7 @@ function []=plot_qtl_effect(locus1,locus2,input_trait,dependency_directory,outpu
 
 
 
-    %ERG11 loci to investigate
+    %loci to investigate
     clear genotype_idx
     
 

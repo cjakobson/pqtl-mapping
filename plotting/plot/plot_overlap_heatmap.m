@@ -24,7 +24,7 @@ function [] = plot_overlap_heatmap(trait_order,dependency_directory,output_direc
     qtl_conditions=qtl_conditions(trait_order);
     
     
-    %overlap matrix -- how to calculate? within N markers?
+    %overlap matrix --  within N markers
     dist_thresh=5;
 
     overlap_mat=nan(length(qtl_conditions));

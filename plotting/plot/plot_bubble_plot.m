@@ -1,4 +1,4 @@
-%plot beta vs ASE
+%mapping bubble plot
 function []=plot_bubble_plot(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
@@ -19,7 +19,6 @@ function []=plot_bubble_plot(dependency_directory,output_directory)
     [physical_gene_order,breaks_to_plot,breaks_to_plot2]=...
         calculate_chr_breaks(dependency_directory,output_directory);
 
-    %put dot plot in here too
     hold on
     xlim([1 12054])
     ylim([1 length(physical_gene_order)])

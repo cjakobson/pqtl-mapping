@@ -1,4 +1,4 @@
-%plot heritability against mean abundance
+
 function []=plot_suppressor_sim(plot_offset,dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)

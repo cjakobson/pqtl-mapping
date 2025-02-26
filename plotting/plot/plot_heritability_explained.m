@@ -37,15 +37,8 @@ function []=plot_heritability_explained(dependency_directory,output_directory)
     to_plot{1}(to_plot{1}==0)=[];
     histogram(to_plot{1},0:0.05:1,'Normalization','probability')
     histogram(to_plot{2},0:0.05:1,'Normalization','probability')
-    %histogram(to_plot{3},0:0.05:1,'Normalization','probability')
-    %easy_box(to_plot)
-    %legend({'F6','Albert mRNA','biobank'})
     legend({'F6','Albert mRNA'})
-    %xticklabels({'F6','biobank','Albert mRNA'})
-    %ylabel('frequency')
-    %xlabel('fraction of H^2 explained')
     xlabel('variance explained')
-    %ylabel('variance explained')
     xlim([0 1])
     axis square
     
