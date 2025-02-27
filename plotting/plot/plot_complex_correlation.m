@@ -18,17 +18,18 @@ function [] = plot_complex_correlation(dependency_directory,output_directory)
 
     temp_labels={'all pairs','complexes'};
 
-    dot_and_line_plot(to_plot)
-    ylim([0 0.25])
-    xlim([0.5 length(to_plot)+.5])
-    xticks(1:length(to_plot))
-    xtickangle(45)
-    xticklabels(temp_labels)
-    ylabel('pairwise correlation')
-
-    
+    hold on
+    for i=1:length(to_plot)
+        histogram(to_plot{i},-1:0.05:1,'normalization','probability')
+    end
+    xlim([-1 1])
+    ylim([0 0.12])
+    legend({'all','complexes'})
+    xlabel('pairwise correlation')
+    ylabel('rel. freq.')
+    axis square
     [p h]=ranksum(to_plot{1},to_plot{2});
-    text(1.5,0.25,num2str(p))
+    text(0.6,0.08,num2str(p))
     
 end
 

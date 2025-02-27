@@ -685,26 +685,26 @@ plot_correlation_heatmap(table2array(genes_to_plot),-0.75,0.75,...
 %C
 %correlations amongst complex members
 %from plotCorrelations.m
-subplot(2,8,3)
+subplot(2,4,2)
 plot_complex_correlation(dependency_directory,output_directory)
 
 
 %D
 %Biogrid overlap summary
-subplot(2,8,4)
+subplot(2,8,5)
 plot_biogrid_overlaps(dependency_directory,output_directory)
 
 
 
 %E
 %SEC61 and Sss1
-subplot(2,8,5)
+subplot(2,8,7)
 plot_locus_effect('YDR086C','Sss1',8221,1.8e5,dependency_directory,output_directory)
 
 
 %F
 %IRA2 and Bcy1
-subplot(2,8,6)
+subplot(2,8,8)
 plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directory)
 
 
@@ -715,7 +715,7 @@ plot_locus_effect('YIL033C','Bcy1',10191,1e5,dependency_directory,output_directo
 %H
 %Fre1 pseudo-volcano
 %from plotCorrelations.m
-subplot(2,4,4)
+subplot(2,4,5)
 plot_pqtl_volcano('YLR214W',dependency_directory,output_directory)
 
 
