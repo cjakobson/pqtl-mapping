@@ -1036,6 +1036,14 @@ subplot(2,4,7)
 plot_qtl_pqtl_min_glc_distance(dependency_directory,output_directory)
 
 
+%J
+%heatmap of QTN overlap
+%from pQTLvsQTL.m
+trait_order=[8 9 10 1 5 7 2 3 6 12 11 4];
+
+subplot(2,4,8)
+plot_overlap_heatmap(trait_order,dependency_directory,output_directory)
+
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_7_1'],'-dsvg','-r0')
@@ -1044,25 +1052,54 @@ print([output_directory 'figure_7_1'],'-djpeg','-r300')
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
-%J
-%example miami plot for two phenotypes
-subplot(2,2,1)
-plot_qtl_miami('rapamycin_5uM','tebuconazole_0.6uM',dependency_directory,output_directory)
-
 
 %K
-%heatmap of QTN overlap
-%from pQTLvsQTL.m
-trait_order=[8 9 10 1 5 7 2 3 6 12 11 4];
+%condition PCA
+subplot(2,4,1)
+plot_ira2_condition_pca(dependency_directory,output_directory)
 
+
+
+%L
+%plot examples
+protein_to_use='HXK2';
+condition_to_use='EtOH-harvest-low';
+y_lim=3e5;
+subplot(2,8,3)
+plot_condition_example(protein_to_use,condition_to_use,y_lim,dependency_directory,output_directory)
+
+
+protein_to_use='UGP1';
+condition_to_use='EtOH-harvest-low';
+y_lim=8e4;
+subplot(2,8,4)
+plot_condition_example(protein_to_use,condition_to_use,y_lim,dependency_directory,output_directory)
+
+
+%M
+%tebuconazole vs mapping
 subplot(2,4,3)
-plot_overlap_heatmap(trait_order,dependency_directory,output_directory)
+condition_to_use='Tebuconazole-10ug-ml';
+plot_ira2_validation_condition(condition_to_use,0,dependency_directory,output_directory)
+
+%labeled version
+subplot(2,4,4)
+condition_to_use='Tebuconazole-10ug-ml';
+plot_ira2_validation_condition(condition_to_use,1,dependency_directory,output_directory)
+
+
+%N
+%agreement with mapping across conditions
+subplot(2,4,5)
+plot_condition_agreement(dependency_directory,output_directory)
+
 
 
 
 set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_7_2'],'-dsvg','-r0')
 print([output_directory 'figure_7_2'],'-djpeg','-r300')
+
 
 
 
@@ -1100,6 +1137,27 @@ plot_qtl_pqtl_distance_slide_pval(dependency_directory,output_directory)
 %from pQTLvsQTL.m
 subplot(2,4,4)
 plot_effect_size_correlation(dependency_directory,output_directory)
+
+
+
+%E
+%example miami plot for two phenotypes
+subplot(2,2,3)
+plot_qtl_miami('rapamycin_5uM','tebuconazole_0.6uM',dependency_directory,output_directory)
+
+
+
+%F
+%rapamycin volcano
+subplot(2,4,7)
+plot_ira2_condition_volcano('Rapamycin-2000nM',0,dependency_directory,output_directory)
+
+
+
+%G
+%n diff exp proteins
+subplot(2,4,8)
+plot_condition_diff_exp(dependency_directory,output_directory)
 
 
 
