@@ -3,7 +3,7 @@ function [mean_mat,v_label_mean,v_strain_mean,v_condition_mean,...
     clean_mat,v_label_all,v_strain_all,v_condition_all,...
     z_mat,protein_names]=parse_ira2_conditions(dependency_directory,output_directory)
 
-    input_data=readtable([dependency_directory '50-0040-diff-condition-proteomes-pass2-all-samples.xlsx']);
+    input_data=readtable([dependency_directory '50-0040-diff-condition-proteomes-pass2-all-samples_smallerset.xlsx']);
     
     input_data(ismember(input_data.strain,''),:)=[];
 
