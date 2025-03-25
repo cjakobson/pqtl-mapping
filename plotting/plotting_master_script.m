@@ -182,6 +182,7 @@ subplot(2,4,5)
 plot_transgression_example('YIR038C',dependency_directory,output_directory)
 
 
+
 %H
 %mapping sensitivity
 %from analyzePqtlSims.m
@@ -208,6 +209,14 @@ set(gcf,'PaperPositionMode','auto')
 print([output_directory 'figure_S1_1'],'-dsvg','-r0')
 print([output_directory 'figure_S1_1'],'-djpeg','-r300')
 
+
+
+%other potential transgression analyses
+
+%CV RM vs YJM; also vs F6
+
+
+tbearvae
 
 
 
