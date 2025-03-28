@@ -214,8 +214,17 @@ print([output_directory 'figure_S1_1'],'-djpeg','-r300')
 %other potential transgression analyses
 
 %CV RM vs YJM; also vs F6
+figure('units','normalized','outerposition',[0 0 1 1])
+
+plot_cv_crossplots(dependency_directory,output_directory)
 
 
+
+set(gcf,'PaperPositionMode','auto')
+print([output_directory 'cv_figure_1'],'-dsvg','-r0')
+print([output_directory 'cv_figure_1'],'-djpeg','-r300')
+
+ 
 tbearvae
 
 
