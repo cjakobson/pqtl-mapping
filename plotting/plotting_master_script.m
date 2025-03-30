@@ -225,7 +225,7 @@ print([output_directory 'cv_figure_1'],'-dsvg','-r0')
 print([output_directory 'cv_figure_1'],'-djpeg','-r300')
 
  
-tbearvae
+
 
 
 
@@ -611,7 +611,7 @@ plot_pqtn_foldx(dependency_directory,output_directory)
 %n/a
 
 
-%K
+%K:
 %SASA and neighbors for all segregating vs all possible
 %from analyse1kSecondary_v3.m
 subplot(2,8,9)
@@ -631,7 +631,7 @@ subplot(2,8,12)
 plot_structure_pqtn(2,dependency_directory,output_directory)
 
 
-
+stnbarev
 
 
 set(gcf,'PaperPositionMode','auto')

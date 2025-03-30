@@ -41,6 +41,7 @@ function []= plot_structure_all_possible(property_idx,dependency_directory,outpu
     easy_box(to_plot)
     ylim([0 yLim2(property_idx)])
     xticklabels({'all poss.','Ts','Tv','all segr.'})
+    text(4,10,num2str(median(to_plot{4},'omitnan')/median(to_plot{1},'omitnan')))
     % for i=1:3
     %     [p h]=ranksum(to_plot{i},to_plot{4});
     %     text((i+4)/2,35,num2str(p))

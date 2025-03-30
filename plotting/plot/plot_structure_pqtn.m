@@ -40,6 +40,7 @@ function []= plot_structure_pqtn(property_idx,dependency_directory,output_direct
 
     [p h]=ranksum(to_plot{2},to_plot{3});
     text(2.5,35,num2str(p))
+    text(3,30,num2str(median(to_plot{3},'omitnan')/median(to_plot{2},'omitnan')))
     
     
 end
