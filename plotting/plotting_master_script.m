@@ -182,26 +182,10 @@ subplot(2,4,5)
 plot_transgression_example('YIR038C',dependency_directory,output_directory)
 
 
-
 %H
-%mapping sensitivity
-%from analyzePqtlSims.m
+%which parent is more extreme?
 subplot(2,4,6)
-plot_sensitivity_simulations(dependency_directory,output_directory)
-
-
-
-%I
-%beta vs varExp
-subplot(2,4,7)
-plot_beta_var_exp(dependency_directory,output_directory)
-
-
-%J
-%marginal rarefaction
-subplot(2,4,8)
-plot_marginal_rarefaction(dependency_directory,output_directory)
-
+plot_parent_distance(dependency_directory,output_directory)
 
 
 
@@ -210,28 +194,40 @@ print([output_directory 'figure_S1_1'],'-dsvg','-r0')
 print([output_directory 'figure_S1_1'],'-djpeg','-r300')
 
 
-
-%other potential transgression analyses
-
-%CV RM vs YJM; also vs F6
 figure('units','normalized','outerposition',[0 0 1 1])
 
-plot_cv_crossplots(dependency_directory,output_directory)
+%I
+%mapping sensitivity
+%from analyzePqtlSims.m
+subplot(2,4,1)
+plot_sensitivity_simulations(dependency_directory,output_directory)
+
+
+
+%J
+%beta vs varExp
+subplot(2,4,2)
+plot_beta_var_exp(dependency_directory,output_directory)
+
+
+%K
+%marginal rarefaction
+subplot(2,4,3)
+plot_marginal_rarefaction(dependency_directory,output_directory)
+
 
 
 
 set(gcf,'PaperPositionMode','auto')
-print([output_directory 'cv_figure_1'],'-dsvg','-r0')
-print([output_directory 'cv_figure_1'],'-djpeg','-r300')
+print([output_directory 'figure_S1_2'],'-dsvg','-r0')
+print([output_directory 'figure_S1_2'],'-djpeg','-r300')
 
- 
 
 
 
 
 
 close all
-
 
 
 
@@ -631,7 +627,7 @@ subplot(2,8,12)
 plot_structure_pqtn(2,dependency_directory,output_directory)
 
 
-stnbarev
+
 
 
 set(gcf,'PaperPositionMode','auto')

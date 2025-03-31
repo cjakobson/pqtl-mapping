@@ -1,4 +1,3 @@
-
 function []=plot_cv_crossplots(dependency_directory,output_directory)
 
     set(0,'DefaultLineLineWidth',1)
@@ -102,17 +101,17 @@ function []=plot_cv_crossplots(dependency_directory,output_directory)
     % end
     % scatter(v1,1:length(v1),10,blue,'filled')
     % scatter(v2,1:length(v1),10,orange,'filled')
-    scatter(v3,v4,10,'k','filled')
+    scatter(log2(v3),log2(v4),10,'k','filled')
     axis square
     % set(gca,'xscale','log')
     % set(gca,'yscale','log')
-    xlim([0 1])
+    xlim([-8 0])
     ylim(xlim)
     xlabel('|(F_6 mean-RM mean)/RM mean|')
     ylabel('|(F_6 mean-YJM mean)/YJM mean|')
     plot(xlim,ylim,':r')
-    text(0.2,0.9,num2str(sum(v4>v3)))
-    text(0.9,0.2,num2str(sum(v4<v3)))
+    text(-7,0,num2str(sum(v4>v3)))
+    text(0,-7,num2str(sum(v4<v3)))
     
 end
 
