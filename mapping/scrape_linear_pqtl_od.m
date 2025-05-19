@@ -8,33 +8,42 @@ set(0,'DefaultAxesFontSize',12)
 set(0,'DefaultAxesLineWidth',2)
 figureCounter=1;
 
+filebase='/Users/christopherjakobson/';
+
+code_directory=[filebase 'Documents/GitHub/pqtl-mapping/'];
+dependency_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/pqtl-mapping-dependencies/'];
+output_directory=[filebase 'Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/manuscript-plots/'];
+
+addpath([code_directory 'plotting'])
+addpath([code_directory 'plotting/parse'])
 
 %load info on variants
 %variantInfo=readtable('/Users/cjakobson/Dropbox/JaroszLab/211028_SegregantProteomicsData_V1/variantInfoStructure.csv');
-variantInfo=readtable('variantInfoStructure.csv');
+variantInfo=readtable([dependency_directory 'variantInfoStructure.csv']);
 
-nameInfo=readtable('nameConversion.csv');
+nameInfo=readtable([dependency_directory 'nameConversion.csv']);
 
 %cis v trans
 %need to quantify nearness from gene position
 %consider +/- 10kb from TES and TSS as "cis"
-geneInfo=readtable('TableS4.xls');
-chrArray={'I','II','III','IV','V','VI','VII','VIII','IX','X',...
-    'XI','XII','XIII','XIV','XV','XVI'};
-for i=1:height(geneInfo)
-    
-    geneName{i}=geneInfo.Name{i};
-    geneStart(i)=geneInfo.SGD_Start(i);
-    geneEnd(i)=geneInfo.SGD_End(i);
-    if sum(ismember(chrArray,geneInfo.Chrom{i}(4:end)))>0
-        geneChr(i)=find(ismember(chrArray,geneInfo.Chrom{i}(4:end)));
-    end
-
-end
+% geneInfo=readtable('TableS4.xls');
+% chrArray={'I','II','III','IV','V','VI','VII','VIII','IX','X',...
+%     'XI','XII','XIII','XIV','XV','XVI'};
+% for i=1:height(geneInfo)
+% 
+%     geneName{i}=geneInfo.Name{i};
+%     geneStart(i)=geneInfo.SGD_Start(i);
+%     geneEnd(i)=geneInfo.SGD_End(i);
+%     if sum(ismember(chrArray,geneInfo.Chrom{i}(4:end)))>0
+%         geneChr(i)=find(ismember(chrArray,geneInfo.Chrom{i}(4:end)));
+%     end
+% 
+% end
+[geneName,geneChr,geneStart,geneEnd]=get_gene_coords(dependency_directory);
 
 
 fdr=0.1;
-load(['pval_cutoffs_from_perm_od_fdr_' num2str(fdr) '.mat'])
+load([dependency_directory 'pval_cutoffs_from_perm_od_fdr_' num2str(fdr) '.mat'])
 
 
 
@@ -47,14 +56,14 @@ for l=1:length(vCutoff)%length(filename)
     
     l
     
-    load('pQTLfilename.mat')
-    load('pQTLtrait.mat')
-    load(['linear-pqtl/' filename{l} '.mat'])
+    load([dependency_directory 'pQTLfilename.mat'])
+    load([dependency_directory 'pQTLtrait.mat'])
+    load([dependency_directory 'linear-pqtl/' filename{l} '.mat'])
     
     %filter by pVal
     bPos=bPos(pValues>pValThresh);
     varianceExplained=varianceExplained(pValues>pValThresh);
-    pValues=pValues(pValues>pValThresh)
+    pValues=pValues(pValues>pValThresh);
     
     isQtn=zeros(length(posToMap),1);
     hasCandidate=zeros(length(posToMap),1);
@@ -158,7 +167,7 @@ end
 
 
 %convert beta to percentage of mean
-abundanceData=readtable('proteinMeanStdData.csv');
+abundanceData=readtable([dependency_directory 'proteinMeanStdData.csv']);
 for i=1:height(toOutput)
     
     tempBeta=toOutput.beta(i);
@@ -176,7 +185,7 @@ end
 
 %also annotate with ase information
 %aseData=readtable('/Users/cjakobson/Dropbox/JaroszLab/hsp90mapping/harmonizeRnaSeqAnalysis/radAseData.csv');
-aseData=readtable('radAseData.csv');
+aseData=readtable([dependency_directory 'radAseData.csv']);
 
 
 
@@ -198,8 +207,9 @@ end
 
 
 
+timestamp=datetime('now','format','yyyyMMdd_hhmm');
 
-writetable(toOutput2,['linear_pqtl_od_fdr_' num2str(fdr) '.csv'])
+writetable(toOutput2,[dependency_directory 'linear_pqtl_od_fdr_' num2str(fdr) '_' char(timestamp)  '.csv'])
 
 
 
