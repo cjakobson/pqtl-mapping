@@ -99,6 +99,12 @@ function [bar_mat] = calculate_biogrid_overlaps(dependency_directory,output_dire
     sum(sum(triu(interaction_mat_physical,1)))/sum(sum(triu(interaction_mat,1)))
     sum(sum(triu(interaction_mat_genetic,1)))/sum(sum(triu(interaction_mat,1)))
 
+    %binomial test vs all of biogrid
+    p=binocdf(sum(is_genetic)+sum(is_both),sum(is_biogrid),...
+        sum(sum(triu(interaction_mat_genetic,1)))/sum(sum(triu(interaction_mat,1))))
+
+    p=binocdf(sum(is_physical)+sum(is_both),sum(is_biogrid),...
+        sum(sum(triu(interaction_mat_physical,1)))/sum(sum(triu(interaction_mat,1))))
 
 
 end
